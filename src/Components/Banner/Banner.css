@@ -1,0 +1,6 @@
+.banner{
+    background: url('/images/banner1.jpg'),linear-gradient(rgb(58, 57, 57,0.5),rgba(66, 65, 63, 0.6));
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;}
