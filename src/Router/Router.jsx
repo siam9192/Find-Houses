@@ -8,6 +8,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyProperties from "../Pages/Dashboard/MyProperties/MyProperties";
 import FavoritedProperties from "../Pages/Dashboard/FavoritedProperties/FavoritedProperties";
 import AddProperty from "../Pages/Dashboard/AddProperty/AddProperty";
+import ChangePassword from "../Pages/Dashboard/ChangePassword/ChangePassword";
 
 const Router = createBrowserRouter([
     {
@@ -47,6 +48,11 @@ const Router = createBrowserRouter([
 {
     path:'/dashboard/add-property',
     element:<AddProperty></AddProperty>
+},
+{
+    path:'/dashboard/change-password',
+    element:<ChangePassword></ChangePassword>
+    
 }
         ]
     }
