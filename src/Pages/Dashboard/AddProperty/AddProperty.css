@@ -1,0 +1,25 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0; /* Start with 0 opacity (completely transparent) */
+    }
+    to {
+      opacity: 1; /* End with 1 opacity (fully visible) */
+    }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0; /* Start with 0 opacity (completely transparent) */
+    }
+    to {
+      opacity: 1; /* End with 1 opacity (fully visible) */
+    }
+  }
+  
+  /* Define the fade-in animation for Tailwind */
+  @layer utilities {
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in-out; /* 1s duration with ease-in-out timing function */
+    }
+  }
+  

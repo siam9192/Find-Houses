@@ -14,8 +14,18 @@ import { PiShareFat } from "react-icons/pi";
 import { MdHome } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import ColumnCard from '../../Components/Reuse/PropertyCard/ColumnCard'
+import { useQuery } from '@tanstack/react-query';
+import AxiosBase from '../../Axios/AxiosBase';
 const Properties = () => {
     const arr = [0,1,2,3,4,5,6,7,8,9,10]
+    const {data:properties=[],isLoading,refetch} = useQuery({
+        queryKey:['properties'],
+        queryFn:async()=>{
+            const response = await AxiosBase().get('/properties')
+            return response.data;
+        }
+    })
+ 
     return (
         <div>
         <Navbar2></Navbar2>
@@ -54,7 +64,7 @@ const Properties = () => {
                 </div>
                 </div>
                 <div className='grid md:grid-cols-2 gap-5'>
-                    {arr.map(item => <ColumnCard key={item}></ColumnCard>)}
+                    {properties.map(item => <ColumnCard id={item._id} image = {item.photos[0]} title = {item.title}  details = {item.details} address = {item.location.address}  key={item._id}></ColumnCard>)}
                 </div>
                 {/* Pagination */}
                 <div className='flex justify-center items-center'>

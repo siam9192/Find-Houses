@@ -4,6 +4,7 @@ import { RxCross1 } from "react-icons/rx";
 import Login from './Login';
 import Signup from './Signup';
 import UserAuth from '../../Authentication/userAuth/userAuth';
+import AxiosBase from '../../Axios/AxiosBase';
 const AccountForms = ({visibility,handleVisibility}) => {
   const [form,setForm] = useState('login')
   const {googleLogin} = UserAuth()
@@ -14,7 +15,19 @@ const AccountForms = ({visibility,handleVisibility}) => {
   const loginWithGoogle = () =>{
     googleLogin()
     .then(res =>{
-      handleVisibility()
+    
+      const user = {
+        email:res.user.email,
+        profilePhoto:'',
+        role:'client'
+    }
+    AxiosBase().put('/user/new/update',{user})
+    .then(res=>{
+      if(res.data.modifiedCount > 0 || res.data.insertedId){
+        handleVisibility()
+      }
+    })
+     
     })
     }
   const  activeButton = 'bg-[#ff385c] text-white px-6  py-2 rounded-md'

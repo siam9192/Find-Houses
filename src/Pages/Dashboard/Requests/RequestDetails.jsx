@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import Navbar2 from '../../Components/Reuse/Navbar2/Navbar2';
-import Container from '../../Components/Reuse/Container/Container';
+import Container from '../../../Components/Reuse/Container/Container';
 import { FaGraduationCap, FaLocationArrow } from 'react-icons/fa6';
 import { GrNext,GrPrevious } from "react-icons/gr";
 import { ImCheckboxChecked } from "react-icons/im";
 import { FaUserDoctor,FaCar } from "react-icons/fa6";
 import { IoIosStar } from "react-icons/io";
-import PropertyReview from './PropertyReview';
-import AddReview from './AddReview';
-import ColumnCard from '../../Components/Reuse/PropertyCard/ColumnCard'
-import Footer from '../../Components/Footer/Footer';
-import SideComponent from './SideComponent';
+import ColumnCard from '../../../Components/Reuse/PropertyCard/ColumnCard';
+import Footer from '../../../Components/Footer/Footer';
 import { Slide } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import AxiosBase from '../../Axios/AxiosBase';
+import AxiosBase from '../../../Axios/AxiosBase';
 import { useParams } from 'react-router-dom';
-const PropertyDetails = () => {
+const RequestDetails = () => {
     const [imageIndex,setImageIndex] = useState(0)
     // const images = ['https://img.rentola.com/04C-6Zchl4ytByKxX1MhZgqNqDE=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19898.jpg','https://img.rentola.com/aGiAzmbnn5wSJ2_HVPaIMneZD5Q=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19897.jpg','https://img.rentola.com/7mqEwgBQCuFZmW8rhnCu2-5ySXM=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19894.jpg','https://img.rentola.com/ngj8rCNRX_C33inHlSZLJShH9I0=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19893.jpg','https://img.rentola.com/QKK-tTwD6yeF_PPcEMlRo180Icc=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19892.jpg','https://img.rentola.com/vpH1_nnM0qaBQcOQCXB5312QsVc=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19896.jpg']
     const {id} = useParams()
@@ -46,7 +42,7 @@ const PropertyDetails = () => {
   
     return (
         <div>
-            <Navbar2></Navbar2>
+           
        <div className='bg-[#f5f7fb] font-pop'>
        <Container>
             <div className='py-10 px-20 flex gap-10'>
@@ -250,41 +246,17 @@ const PropertyDetails = () => {
                     
                  </div>
                     </div>
-                    <div className='p-10 space-y-5 bg-white shadow-md '>
-            <h2 className='text-black text-2xl font-medium'>3Reviews</h2>
-            <div className='border-t-4 border-[#ff385c] w-[8%]'></div>
-            <div  className='space-y-4 max-h-[500px] overflow-y-auto'>
-            <PropertyReview></PropertyReview>
-            <PropertyReview></PropertyReview>
-            <PropertyReview></PropertyReview>
-            </div>
-            </div>
-            <div className='p-10 space-y-5 bg-white shadow-md '>
-            <h2 className='text-black text-2xl font-medium'>Add Review</h2>
-            <div className='border-t-4 border-[#ff385c] w-[8%]'></div>
-            <div  className='space-y-4 max-h-[500px] overflow-y-auto'>
-           <AddReview></AddReview>
-            </div>
-
-            </div>
-            <div className='p-10 space-y-5  '>
-            <h2 className='text-black text-2xl font-medium'>Similar Properties</h2>
-            <div className='border-t-4 border-[#ff385c] w-[8%]'></div>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 '>
-                <ColumnCard></ColumnCard>
-                <ColumnCard></ColumnCard>
-            </div>
-            </div>
+                 
+        
+        
                 </div>
-                <div className='w-[30%] relative'>
-                    <SideComponent></SideComponent>
-                </div>
+             
                 </div>
             </Container>
        </div>
-       <Footer></Footer>
+       
         </div>
     );
 }
 
-export default PropertyDetails;
+export default RequestDetails;

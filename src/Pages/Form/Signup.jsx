@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import UserAuth from '../../Authentication/userAuth/userAuth';
 import { updateProfile } from 'firebase/auth';
 import auth from '../../Authentication/Firebase/Firebase.config';
+import AxiosBase from '../../Axios/AxiosBase';
 
 const Signup = () => {
     const {createUser,googleLogin} = UserAuth();
-
     const handleSignUp = (e)=>{
         e.preventDefault()
         const form = e.target;
@@ -18,7 +18,8 @@ const Signup = () => {
             firstName,
             lastName,
             email,
-            profilePhoto:''
+            profilePhoto:'',
+            role:'client'
         }
 
         createUser(email,password)
@@ -26,6 +27,7 @@ const Signup = () => {
          updateProfile(auth.currentUser,{
          displayName:`${firstName} ${lastName}`
          })
+         AxiosBase().post('/user/new',user)
          form.reset()
         })
     

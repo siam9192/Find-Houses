@@ -20,21 +20,24 @@ const DashBar = () => {
               <div className={`px-10 py-5 ${pathname === '/dashboard' ? 'bg-[#172133]' : ''} `}>
               <Link to = '/dashboard' className='flex gap-3 items-center '><MdLocationPin></MdLocationPin> <h2>Dashboard</h2></Link>
               </div>
-              <div className={`px-10 py-5 ${pathname === '/dashboard/profile' ? 'bg-[#172133]' : ''} `}>
+              {/* <div className={`px-10 py-5 ${pathname === '/dashboard/profile' ? 'bg-[#172133]' : ''} `}>
               <Link to='/dashboard/profile' className='flex gap-3 items-center '><RiUser3Fill></RiUser3Fill> <h2>Profile</h2></Link>
-              </div>
+              </div> */}
               <div className={`px-10 py-5 ${pathname === '/dashboard/my-properties' ? 'bg-[#172133]' : ''} `}>
               <Link to='/dashboard/my-properties' className='flex gap-3 items-center '><FaList></FaList> <h2>My Properties</h2></Link>
               </div>
               <div className={`px-10 py-5 ${pathname === '/dashboard/favourited-properties' ? 'bg-[#172133]' : ''} `}>
               <Link to='/dashboard/favourited-properties' className='flex gap-3 items-center '><IoHeart></IoHeart> <h2>Favourited Properties</h2></Link>
               </div>
+              <div className={`px-10 py-5 ${pathname === '/dashboard/property-requests' ? 'bg-[#172133]' : ''} `}>
+              <Link to = '/dashboard/property-requests' className='flex gap-3 items-center '><FaList></FaList> <h2>Requests</h2></Link>
+              </div>
               <div className={`px-10 py-5 ${pathname === '/dashboard/add-property' ? 'bg-[#172133]' : ''} `}>
               <Link to = '/dashboard/add-property' className='flex gap-3 items-center '><FaList></FaList> <h2>Add Property</h2></Link>
               </div>
-              <div className={`px-10 py-5 ${pathname === '/dashboard/payments' ? 'bg-[#172133]' : ''} `}>
+              {/* <div className={`px-10 py-5 ${pathname === '/dashboard/payments' ? 'bg-[#172133]' : ''} `}>
               <Link className='flex gap-3 items-center '><MdOutlinePayment></MdOutlinePayment> <h2>Payments</h2></Link>
-              </div>
+              </div> */}
               <div className={`px-10 py-5 ${pathname === '/dashboard/change-password' ? 'bg-[#172133]' : ''} `}>
               <Link to='/dashboard/change-password' className='flex gap-3 items-center '><IoLockClosedSharp></IoLockClosedSharp> <h2>Change Password</h2></Link>
               </div>

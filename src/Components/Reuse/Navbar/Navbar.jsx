@@ -5,6 +5,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { MdArrowDropUp } from "react-icons/md";
 import AccountForms from '../../../Pages/Form/AccountForm';
 import UserAuth from '../../../Authentication/userAuth/userAuth';
+import './Navbar.css'
 const Navbar = () => {
 const [scrollY,setScrollY] = useState(0);
 const [visibility,setVisibility] = useState(false)
@@ -65,8 +66,10 @@ const handleNavCard = ()=>{
          </div>
         </div>
         {/* sign up from */}
-        <div className={`p-5 bg-white font-pop ${navCard ? 'block' :'hidden'} flex flex-col gap-3 min-w-[250px] rounded-lg fixed top-20 right-4 z-50  duration-200`}>
-          <h1 className='text-xl font-semibold'>{user?.displayName}</h1>
+        <div className={`p-5 bg-white font-pop ${navCard ? 'block' :'hidden'} flex flex-col gap-3 min-w-[250px] rounded-lg fixed top-20 right-4 z-50  duration-200 animate-fade-in`} style={{
+          
+        }}>
+          <h1 className='text-xl font-semibold'>{user?.displayName || ''}</h1>
           <Link to='/profile' className='hover:text-[#ff385c] hover:text-xl'>Profile</Link>
           <Link to='/dashboard' className='hover:text-[#ff385c] hover:text-xl'>Dashboard</Link>
           <Link to='setting' className='hover:text-[#ff385c] hover:text-xl'>Setting</Link>
