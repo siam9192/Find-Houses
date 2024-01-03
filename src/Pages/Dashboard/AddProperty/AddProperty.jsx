@@ -70,6 +70,7 @@ const AddProperty = () => {
     const handleSubmit = async(e) =>{
         e.preventDefault()
         const form = e.target;
+        const today = new Date()
         const title = form.title.value;
         const description = form.description.value;
         const price = parseInt(form.price.value);
@@ -104,6 +105,11 @@ const AddProperty = () => {
             age,rooms,bathRooms
         },
         features
+        },
+        date:{
+         day:today.getDay(),
+         month:today.getMonth(),
+         year:today.getFullYear()
         },
         contact,
         location,
