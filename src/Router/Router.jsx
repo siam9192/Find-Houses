@@ -11,6 +11,7 @@ import AddProperty from "../Pages/Dashboard/AddProperty/AddProperty";
 import ChangePassword from "../Pages/Dashboard/ChangePassword/ChangePassword";
 import Requests from "../Pages/Dashboard/Requests/Requests";
 import RequestDetails from "../Pages/Dashboard/Requests/RequestDetails";
+import Profile from "../Pages/Dashboard/Profile/Profile";
 
 const Router = createBrowserRouter([
     {
@@ -39,6 +40,11 @@ const Router = createBrowserRouter([
     path:'/dashboard',
     element:<Dashboard></Dashboard>
 },
+{
+    path:'/dashboard/profile',
+    element:<Profile></Profile>
+}
+,
 {
     path:'/dashboard/my-properties',
     element:<MyProperties></MyProperties>
