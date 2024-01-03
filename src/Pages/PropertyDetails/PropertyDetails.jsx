@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar2 from '../../Components/Reuse/Navbar2/Navbar2';
 import Container from '../../Components/Reuse/Container/Container';
-import { FaGraduationCap, FaLocationArrow } from 'react-icons/fa6';
+import { FaGraduationCap, FaLocationArrow, FaV } from 'react-icons/fa6';
 import { GrNext,GrPrevious } from "react-icons/gr";
 import { ImCheckboxChecked } from "react-icons/im";
 import { FaUserDoctor,FaCar } from "react-icons/fa6";
@@ -15,10 +15,16 @@ import { Slide } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import AxiosBase from '../../Axios/AxiosBase';
 import { useParams } from 'react-router-dom';
+import { FaHeart } from 'react-icons/fa';
+import UserAuth from '../../Authentication/userAuth/userAuth';
 const PropertyDetails = () => {
-    const [imageIndex,setImageIndex] = useState(0)
+    const [imageIndex,setImageIndex] = useState(0);
+    const {user} = UserAuth();
+     const [isFev,setIsFav] = useState(null)
+     const [favRefetch,setFavRefetch] = useState(false);
     // const images = ['https://img.rentola.com/04C-6Zchl4ytByKxX1MhZgqNqDE=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19898.jpg','https://img.rentola.com/aGiAzmbnn5wSJ2_HVPaIMneZD5Q=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19897.jpg','https://img.rentola.com/7mqEwgBQCuFZmW8rhnCu2-5ySXM=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19894.jpg','https://img.rentola.com/ngj8rCNRX_C33inHlSZLJShH9I0=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19893.jpg','https://img.rentola.com/QKK-tTwD6yeF_PPcEMlRo180Icc=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19892.jpg','https://img.rentola.com/vpH1_nnM0qaBQcOQCXB5312QsVc=/fit-in/635x405/filters:format(jpeg):fill(white)/https%3A%2F%2Fimages2.gnomen-europe.com%2Fc52bf5d419134a38438f8b04e07414c9%2Flarge%2F19896.jpg']
-    const {id} = useParams()
+    const {id} = useParams();
+    
     const {data:property,isLoading,refetch} = useQuery({
         queryKey:['property'],
         queryFn:async()=>{
@@ -26,8 +32,16 @@ const PropertyDetails = () => {
             return response.data;
         }
     })
-   
-    console.log(property)
+    useEffect(()=>{
+        if(!user||!property){
+            return;
+        }
+        AxiosBase().get(`/checkFavourite?email=${user?.email}&id=${property?._id}`)
+        .then((res)=>{
+        setIsFav(res.data)
+        console.log(res.data)
+        })
+    },[user,property,favRefetch])
     const nextSlide = (index)=>{
         if(imageIndex === property?.photos.length - 1){
            setImageIndex(0)
@@ -42,6 +56,23 @@ const PropertyDetails = () => {
             return;
         }
         setImageIndex(imageIndex -1)
+    }
+    const handleFav = (id)=>{
+        const fav = {
+            propertyId:id,
+            email:user.email
+        }
+        if(isFev){
+          
+            return;
+        }
+       
+      AxiosBase().patch('/add-property/fav',{fav})
+      .then(res => {
+        if(res.data.insertedId){
+           setFavRefetch(!favRefetch)
+        }
+      })
     }
   
     return (
@@ -69,8 +100,11 @@ const PropertyDetails = () => {
                 <div className='border-t-4 border-[#ff385c] w-[8%]'></div>
                 <div className=''>
                    <div className='relative'> <img src={property?.photos[imageIndex]} alt="" className='w-full' />
+                   <div className='absolute top-0 left-0 flex justify-end w-full p-5'>
+                    <div className={`px-4 py-2 text-xl bg-white flex items-center gap-2 hover:cursor-pointer $ rounded-md shadow-lg`} onClick={()=>handleFav(property?._id)}><FaHeart className={`${isFev ? 'text-[#ff385c]' : 'text-black'}`}></FaHeart><h2>{isFev ? 'Saved' : 'Save'}</h2></div>
+                   </div>
                    <div className='absolute flex justify-between items-center top-1/2 px-10 w-full'>
-                    <button className='text-xl text-white bg-[#ff385c] p-4 rounded-full' onClick={prevSlide}><GrPrevious></GrPrevious></button> <button className='text-xl text-white bg-[#ff385c] p-4 rounded-full' onClick={nextSlide}><GrNext></GrNext></button>
+                    <button className='text-xl text-white bg-[#ff385c] hover:bg-black p-4 rounded-full' onClick={prevSlide}><GrPrevious></GrPrevious></button> <button className='text-xl text-white bg-[#ff385c] hover:bg-black  p-4 rounded-full' onClick={nextSlide}><GrNext></GrNext></button>
                     </div></div>
                 </div>
                 <div className='flex gap-2  items-center overflow-x-auto  px-10'>

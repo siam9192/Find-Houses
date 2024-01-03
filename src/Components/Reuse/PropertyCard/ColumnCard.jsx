@@ -28,7 +28,7 @@ const ColumnCard = ({id,image,title,details,address}) => {
              <div className='flex items-center gap-3'><PiGarage className='text-2xl'></PiGarage> <span>{details?.garage? details.garage : 0} Garage</span></div>
              </div>
              <div className='border-t-2 pt-5 flex justify-between items-center'>
-                <h1 className='text-xl text-black'>$245769</h1>
+                <h1 className='text-xl text-black'>${details?.price}</h1>
                 <div className='flex items-center gap-3 text-xl'>
                  <CiHeart></CiHeart> <PiShareFat></PiShareFat>
                 </div>

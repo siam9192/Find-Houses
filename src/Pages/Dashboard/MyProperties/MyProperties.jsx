@@ -53,9 +53,11 @@ const MyProperties = () => {
  }
  const nextPage = ()=>{
     const newPage = currentPage + 1;
-    if(newPage > pages[-1]){
+    if(newPage <= pages[pages.length-1]){
+        setCurrentPage(newPage)
      return;
     }
+    
  }
     const handleDelete = (id)=>{
       
@@ -147,13 +149,13 @@ console.log('slice',)
     </tbody>
   </table>
   <div className='flex items-center gap-3 px-5'>
-    <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md'>Previous</button>
+    <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={prevPage}>Previous</button>
     {
         pages.map((page,index)=>{
             return <button className={`px-4 py-2 ${currentPage === page ? 'bg-black text-white' : ''} hover:bg-[#ff385c] border-2 border-[#ff385c] text-black hover:text-white rounded-md`} onClick={()=>handleCurrentPage(page)} key={index}>{page}</button>
         })
     }
-    <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md'>Next</button>
+    <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={nextPage}>Next</button>
   </div>
 </div>
             </div>
