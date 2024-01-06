@@ -12,10 +12,23 @@ const PopularProperties = () => {
         <div className='font-pop py-10  bg-[#ff385c]'>
          <Container>
             <Heading heading={'Discover Popular Properties'} title={'We provide full service at every step'} color={'text-white'}></Heading>
-            <div className='py-6 '>
+            <div className='py-6 lg:px-0 px-2'>
             <Swiper
-        slidesPerView={4}
-        spaceBetween={30}
+              breakpoints={{
+                640: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: 4,
+                  spaceBetween: 40,
+                }
+              }}
+            spaceBetween={30}
         freeMode={true}
         pagination={{
           clickable: true,

@@ -5,7 +5,7 @@ import Container from '../Reuse/Container/Container';
 import { FaCircleArrowRight } from "react-icons/fa6";
 const FeaturedProperties = () => {
     return (
-        <div className='bg-[#f5f7fb] py-10'>
+        <div className='bg-[#f5f7fb] py-10 lg:px-0 px-2'>
           <Container>
           <Heading heading={'Featured Properties'} title={'These is our featured properties'}></Heading>
             <div className='py-5 grid grid-cols-1 md:grid-cols-2 gap-10'>

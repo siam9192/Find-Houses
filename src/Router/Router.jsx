@@ -12,6 +12,7 @@ import ChangePassword from "../Pages/Dashboard/ChangePassword/ChangePassword";
 import Requests from "../Pages/Dashboard/Requests/Requests";
 import RequestDetails from "../Pages/Dashboard/Requests/RequestDetails";
 import Profile from "../Pages/Dashboard/Profile/Profile";
+import Users from "../Pages/Dashboard/Users/Users";
 
 const Router = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ const Router = createBrowserRouter([
 {
     path:'/dashboard/profile',
     element:<Profile></Profile>
+},
+{
+    path:'/dashboard/users',
+    element:<Users></Users>
 }
 ,
 {

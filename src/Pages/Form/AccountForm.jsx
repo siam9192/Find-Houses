@@ -34,7 +34,7 @@ const AccountForms = ({visibility,handleVisibility}) => {
   const  disableButton = 'bg-[#939192] text-black px-6  py-2 rounded-md '
 
     return (
-        <div className={`w-full h-[100vh]   bg-[#2a252597] ${visibility ? 'block' : 'hidden'} fixed top-0 left-0 z-50 flex justify-center py-10 font-pop `}>
+        <div className={`w-full h-[100vh]   bg-[#2a252597] transition ease-in-out delay-150 ${visibility ? 'block' : 'hidden'} fixed top-0 left-0 z-50 flex justify-center py-10 font-pop `}>
           <div className='bg-white rounded-lg lg:w-1/3 py-5 max-h-[100vh] overflow-y-auto'>
             <div className='flex justify-between items-center px-5 border-b-2 pb-2'>
                 <h1 className='text-black text-2xl'>Welcome to <span className='font-semibold'>Find</span><span className='text-[#ff385c]'>Houses</span></h1>

@@ -17,6 +17,7 @@ import AxiosBase from '../../Axios/AxiosBase';
 import { useParams } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import UserAuth from '../../Authentication/userAuth/userAuth';
+import Navbar from '../../Components/Reuse/Navbar/Navbar';
 const PropertyDetails = () => {
     const [imageIndex,setImageIndex] = useState(0);
     const {user} = UserAuth();
@@ -77,15 +78,15 @@ const PropertyDetails = () => {
   
     return (
         <div>
-            <Navbar2></Navbar2>
-       <div className='bg-[#f5f7fb] font-pop'>
+           <Navbar></Navbar>
+       <div className='mt-32 bg-[#f5f7fb] font-pop'>
        <Container>
-            <div className='py-10 px-20 flex gap-10'>
-                <div className='w-[70%] space-y-10'>
-              <div  className='flex justify-between items-center gap-5'>
+            <div className='py-10 lg:px-20 px-4 lg:flex gap-10'>
+                <div className='lg:w-[70%] space-y-10'>
+              <div  className='lg:flex justify-between items-center gap-5'>
                 <div>
                     <div className='space-y-3'>
-                        <div className='flex gap-5'> <h1 className='text-3xl font-semibold text-black'>{property?.title}</h1> <h3 className='py-2 px-4 rounded-full bg-[#ff385c] text-white'>{property?.details.status}</h3></div>
+                        <div className='flex lg:flex-row flex-col-reverse gap-5'> <h1 className='text-3xl font-semibold text-black'>{property?.title}</h1> <h3 className='py-2 px-4 w-fit rounded-full bg-[#ff385c] text-white'>{property?.details.status}</h3></div>
                    
                     <div className='flex gap-2 items-center'><FaLocationArrow></FaLocationArrow><p>{property?.location.address}</p></div>
                     </div>
@@ -95,28 +96,28 @@ const PropertyDetails = () => {
                 <h4>1200/sq ft</h4>
                 </div>
               </div>
-              <div className='bg-white p-10 shadow-md space-y-5'>
+              <div className='bg-white lg:p-10 p-5 shadow-md space-y-5'>
                 <h2 className='text-black text-2xl font-medium'>Gallery</h2>
                 <div className='border-t-4 border-[#ff385c] w-[8%]'></div>
                 <div className=''>
                    <div className='relative'> <img src={property?.photos[imageIndex]} alt="" className='w-full' />
                    <div className='absolute top-0 left-0 flex justify-end w-full p-5'>
-                    <div className={`px-4 py-2 text-xl bg-white flex items-center gap-2 hover:cursor-pointer $ rounded-md shadow-lg`} onClick={()=>handleFav(property?._id)}><FaHeart className={`${isFev ? 'text-[#ff385c]' : 'text-black'}`}></FaHeart><h2>{isFev ? 'Saved' : 'Save'}</h2></div>
+                    <div className={`px-4 py-2 lg:text-xl bg-white flex items-center gap-2 hover:cursor-pointer $ rounded-md shadow-lg`} onClick={()=>handleFav(property?._id)}><FaHeart className={`${isFev ? 'text-[#ff385c]' : 'text-black'}`}></FaHeart><h2>{isFev ? 'Saved' : 'Save'}</h2></div>
                    </div>
                    <div className='absolute flex justify-between items-center top-1/2 px-10 w-full'>
                     <button className='text-xl text-white bg-[#ff385c] hover:bg-black p-4 rounded-full' onClick={prevSlide}><GrPrevious></GrPrevious></button> <button className='text-xl text-white bg-[#ff385c] hover:bg-black  p-4 rounded-full' onClick={nextSlide}><GrNext></GrNext></button>
                     </div></div>
                 </div>
-                <div className='flex gap-2  items-center overflow-x-auto  px-10'>
+                <div className='flex flex-wrap gap-2  items-center overflow-x-auto  lg:px-10 '>
                         {property?.photos?.map((image,index)=>{
                             return <div className='relative hover:cursor-pointer' key={index} onClick={()=> setImageIndex(index)}>
-                                <img src={image} alt="" className='w-72 h-32 '/>
+                                <img src={image} alt="" className=' w-32 h-24 '/>
                                 <div className={`${imageIndex === index ? 'hidden' : 'block'} w-full h-full bg-[#e4e4e482] absolute top-0 right-0`}></div>
                             </div>
                         })}
                     </div>
               </div>
-            <div className='p-10 space-y-5 bg-white shadow-md'>
+            <div className='lg:p-10 p-5 space-y-5 bg-white shadow-md'>
             <h2 className='text-black text-2xl font-medium'>Description</h2>
                 <div className='border-t-4 border-[#ff385c] w-[8%]'></div>
                 <p>{property?.description}</p>
@@ -310,7 +311,7 @@ const PropertyDetails = () => {
             </div>
             </div>
                 </div>
-                <div className='w-[30%] relative'>
+                <div className='lg:w-[30%] relative'>
                     <SideComponent></SideComponent>
                 </div>
                 </div>

@@ -19,11 +19,11 @@ const FavoritedProperties = () => {
       AxiosBase().get(`/favourite-properties?email=${user.email}`)
       .then(res=>{
         setProperties(res.data)
-        setProperties(res.data)
+       
         const total = res.data.length
-        console.log(total)
+        
         const pageCount = Math.ceil(total/4);
-        console.log(pageCount)
+      
         const array = []
         for(let i = 1 ; i <= pageCount; i++ ){
           array.push(i)   

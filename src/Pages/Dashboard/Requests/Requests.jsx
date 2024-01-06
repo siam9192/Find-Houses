@@ -8,6 +8,7 @@ import UserAuth from '../../../Authentication/userAuth/userAuth';
 import { responsiveProperty } from '@mui/material/styles/cssUtils';
 
 const Requests = () => {
+  const [agentProfile,setAgentProfile] = useState(null)
     const [requests,setRequests] = useState([])
     // this state is for refetching the api
     const [refetch,setRefetch] = useState(false);
@@ -20,14 +21,31 @@ const Requests = () => {
       })
       
     },[refetch])
-    console.log(requests)
+  useEffect(()=>{
+    if(!user){
+      return
+    }
+    AxiosBase().get(`/user/profile?email=${user?.email}`)
+    .then(res=>{
+setAgentProfile(res.data)
+    })
+  },[user])
+  console.log(agentProfile)
     const approveProperty = (id) =>{
-       AxiosBase().patch(`/property-requests/approve?email=${user.email}`,{id})
+      const updatedDoc = {
+        name:agentProfile.firstName + ' '+ agentProfile.lastName,
+        email:agentProfile.contact_email,
+        phone: agentProfile.contact_phone,
+        address:agentProfile.address
+
+      }
+       AxiosBase().patch(`/property-requests/approve?email=${user.email}`,{id,doc:updatedDoc})
        .then(res=>{
         if(res.data.modifiedCount > 0){
             setRefetch(!refetch)
         }
        })
+      
     }
     const deleteRequests = (id)=>{
         AxiosBase().patch(`/property-request/delete`,{id})

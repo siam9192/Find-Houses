@@ -2,7 +2,7 @@ import React from 'react';
 
 const Review = () => {
     return (
-        <div className='p-10 bg-white space-y-5 '>
+        <div className='p-10 bg-white shadow-lg space-y-5 '>
             <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, animi! Mollitia, quas magnam quod praesentium obcaecati nulla iure ratione optio enim. Eveniet quasi natus harum tempore non ipsa culpa quidem!</p>
         <div className='flex justify-between items-center'>
          <div className='flex items-center gap-3'>

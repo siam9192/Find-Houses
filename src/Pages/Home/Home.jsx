@@ -14,7 +14,7 @@ const Home = () => {
             <Banner></Banner>
             <div className='pt-10 space-y-10'>
                 <PopularPages></PopularPages>
-                <FeaturedProperties></FeaturedProperties>
+                {/* <FeaturedProperties></FeaturedProperties> */}
                 <Services></Services>
                 <PopularProperties></PopularProperties>
                 <Agents></Agents>

@@ -114,6 +114,7 @@ const AddProperty = () => {
         contact,
         location,
         approved: false,
+        request_status:'Pending',
         agentInformation:{
             name: null,
             image: null,

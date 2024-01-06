@@ -8,7 +8,7 @@ import { CiHeart } from "react-icons/ci";
 import { PiShareFat } from "react-icons/pi";
 import { Link } from 'react-router-dom';
 const ColumnCard = ({id,image,title,details,address}) => {
-    console.log(image,title,details,address)
+   
     return (
         <Link to={`/property-details/${id}`} className='border-1 border-black font-pop '>
             <div className='relative'>

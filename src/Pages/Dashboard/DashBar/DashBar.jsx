@@ -20,7 +20,7 @@ const DashBar = () => {
       }
     AxiosBase().get(`/user/check-role?email=${user.email}`)
     .then(res =>{
-      setUserRole('agent')
+      setUserRole(res.data)
     })
     },[user])
    
@@ -36,6 +36,9 @@ const DashBar = () => {
               </div>
               <div className={`px-10 py-5 ${pathname === '/dashboard/profile' ? 'bg-[#172133]' : ''} `}>
               <Link to='/dashboard/profile' className='flex gap-3 items-center '><RiUser3Fill></RiUser3Fill> <h2>Profile</h2></Link>
+              </div>
+              <div className={`px-10 py-5 ${pathname === '/dashboard/users' ? 'bg-[#172133]' : ''} `}>
+              <Link to='/dashboard/users' className='flex gap-3 items-center '><RiUser3Fill></RiUser3Fill> <h2>Users</h2></Link>
               </div>
             
             {

@@ -10,7 +10,7 @@ const Services = () => {
         <div className='font-pop py-5'>
             <Heading heading={'Why chose us'} title={'We provide full service at every step'}></Heading>
             <Container>
-                <div className='py-6 grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
+                <div className='py-6 grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:px-0 px-2'>
                     <div className='space-y-2 border-2 p-2'>
                         <div className='flex justify-center items-center text-7xl text-[#ff385c]'>
                             <MdOutlineMapsHomeWork ></MdOutlineMapsHomeWork>

@@ -34,7 +34,7 @@ const SideComponent = () => {
     
     return (
         <div className='space-y-5'>
-            <div className='bg-white p-5 shadow-md'>
+            {/* <div className='bg-white p-5 shadow-md'>
                 <div className='flex items-center gap-3 text-xl pb-5 border-b-2'>
                     <FaCalendarAlt className='text-[#ff385c]'></FaCalendarAlt> <h2 className='text-black'>Schedule a Tour</h2>
                 </div>
@@ -63,7 +63,7 @@ const SideComponent = () => {
                
                 </div>
                 <button className='w-full bg-[#ff385c] text-white mt-4 py-3 rounded-lg'>Submit Request</button>
-            </div>
+            </div> */}
             <div className='bg-white space-y-3 shadow-md p-5'>
                 <h1 className='text-black text-xl'>Agent Information</h1>
                 <div className='py-2 border-t-2 border-b-2 space-y-3'>
