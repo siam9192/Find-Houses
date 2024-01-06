@@ -35,21 +35,21 @@ const handleNavCard = ()=>{
 
     return (
       <div>
-        <div className={`lg:py-4 py-2 ${scrollY > 300 ?'bg-white':'bg-[#999998]'} font-pop px-3 ${scrollY > 300 ?'':'bg-opacity-40'} fixed top-0 w-full z-50 shadow-md duration-1000`}>
+        <div className={`lg:py-8 py-6 ${scrollY > 300 ?'bg-white':'bg-[#60605f]'} font-pop px-3 ${scrollY > 300 ?'':'bg-opacity-40'} fixed top-0 w-full z-50 shadow-md duration-1000`}>
          <div className={`flex justify-between items-center text-white ${scrollY > 300 ?'text-black':'text-white'}`}>
             <div className='flex items-center gap-8'>
         <div>
         {/* <TbHomeSignal className='text-6xl text-[#ff385c]'></TbHomeSignal> */}
-        <img src="https://i.ibb.co/3skJsNn/pngwing-com-8.png" alt="" className='w-20' />
-                <h3 className={` ${scrollY > 300? 'text-black':'text-white'} text-xl`}>Find House</h3>
+        <img src="https://i.ibb.co/3skJsNn/pngwing-com-8.png" alt="" className='w-20 hidden' />
+                <h3 className={` ${scrollY > 300? 'text-black':'text-white'} font-semibold text-4xl`}>Find<span className='text-[#ff385c] '>House</span></h3>
         </div>
                 <nav className='lg:block hidden'>
              <ul className={`flex justify-between items-center space-x-3 text-xl ${scrollY > 300 ?'text-black':'text-white'}`}>
-             <NavLink  to="/"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}> Home </NavLink>
-             <NavLink  to="/listing"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}> Listing </NavLink>
-             <NavLink  to="/properties"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}> Properties </NavLink>
-             <NavLink  to="/pages"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}> Pages </NavLink>
-             <NavLink  to="/contact"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}> Contact </NavLink>
+             <NavLink  to="/"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Home </NavLink>
+             <NavLink  to="/listing"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Listing </NavLink>
+             <NavLink  to="/properties"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Properties </NavLink>
+             <NavLink  to="/pages"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Pages </NavLink>
+             <NavLink  to="/contact"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Contact </NavLink>
              </ul>
             </nav>
             </div>
