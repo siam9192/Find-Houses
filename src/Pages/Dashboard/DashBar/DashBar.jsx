@@ -3,7 +3,7 @@ import UserAuth from '../../../Authentication/userAuth/userAuth';
 import { Link, useLocation } from 'react-router-dom';
 import { MdLocationPin } from "react-icons/md";
 import { RiUser3Fill } from "react-icons/ri";
-import { FaList } from "react-icons/fa";
+import { FaList, FaUsers } from "react-icons/fa";
 import { IoHeart } from "react-icons/io5";
 import { MdOutlinePayment } from "react-icons/md";
 import { IoLockClosedSharp } from "react-icons/io5";
@@ -38,7 +38,7 @@ const DashBar = () => {
               <Link to='/dashboard/profile' className='flex gap-3 items-center '><RiUser3Fill></RiUser3Fill> <h2>Profile</h2></Link>
               </div>
               <div className={`px-10 py-5 ${pathname === '/dashboard/users' ? 'bg-[#172133]' : ''} `}>
-              <Link to='/dashboard/users' className='flex gap-3 items-center '><RiUser3Fill></RiUser3Fill> <h2>Users</h2></Link>
+              <Link to='/dashboard/users' className='flex gap-3 items-center '><FaUsers></FaUsers> <h2>Users</h2></Link>
               </div>
             
             {

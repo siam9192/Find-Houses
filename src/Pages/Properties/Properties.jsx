@@ -29,7 +29,7 @@ const Properties = () => {
     const [pages,setPages] = useState([])
     const [currentPage,setCurrentPage] = useState(1)
     const params = useSearchParams()[0]
-
+    
     // handle all dropdowns
     const [locationMenu, setLocationMenu] = useState(false);
     const [propertyMenu, setPropertyMenu] = useState(false);
@@ -61,7 +61,7 @@ const Properties = () => {
             return response.data;
         }
     })
-console.log(sortBy)
+
     useEffect(()=>{
         refetch()
         const total = properties.length
@@ -182,6 +182,12 @@ console.log(sortBy)
                                 </div>
                             </div>
                             {
+                                isLoading ? <div className='py-10 text-center'>
+                                    <span className="loading loading-spinner loading-lg text-[#ff385c]"></span>
+                                </div>
+                                :
+                            <>
+                            {
                                 layOutType === 'grid' ?
                                     <div className='grid md:grid-cols-2 gap-5'>
                                         {  properties.slice((currentPage-1)*6,((currentPage-1)*6)+6).map(item => <ColumnCard id={item._id} image={item.photos[0]} title={item.title} details={item.details} address={item.location.address} key={item._id}></ColumnCard>)}
@@ -195,8 +201,10 @@ console.log(sortBy)
                                         }
                                     </div>
                             }
+                            </>
+}
                             {/* Pagination */}
-                        { properties.length  > 0 ||pages.length > 0 &&  <div className='flex justify-center items-center'>
+                        { properties.length  > 4 &&  <div className='flex justify-center items-center'>
                             <div className='flex items-center gap-3 px-5'>
     <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={prevPage}>Previous</button>
     {

@@ -36,6 +36,7 @@ const SignUpPage = () => {
     const loginWithGoogle = () =>{
         googleLogin()
         .then(res =>{
+            
             document.getElementById('my_modal_4').showModal()
           const user = {
             email:res.user.email,
@@ -44,6 +45,7 @@ const SignUpPage = () => {
             profilePhoto:res.user.photoURL,
             role:'client'
         }
+       
         AxiosBase().post('/user/login/google-facebook/new',user)
         .then(res =>{
             document.getElementById('my_modal_4').close()

@@ -16,6 +16,7 @@ import Users from "../Pages/Dashboard/Users/Users";
 import SignUpPage from "../Pages/SignUpPage/SignUpPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import PrivateRoutes from "../Components/PrivateRoutes/PrivateRoutes";
+import ClientProperties from "../Pages/Dashboard/ClientProperties/ClientProperties";
 
 const Router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const Router = createBrowserRouter([
 {
     path:'/dashboard/add-property',
     element:<AddProperty></AddProperty>
+},
+{
+    path:'/dashboard/client-properties',
+    element:<ClientProperties></ClientProperties>
 },
 {
     path:'/dashboard/change-password',
