@@ -16,7 +16,7 @@ const FlexCard = ({id,image,title,details,address}) => {
                     <h3>For sale</h3>
                 </div>
             </div>
-            <div className='fle flex-col py-2 px-2 space-y-5 w-[60%]'>
+            <div className='flex flex-col h-full  py-2 px-2 space-y-5  w-[60%]'>
             <h1 className='text-black text-xl font-'>{title}</h1>
             <div className='flex items-center gap-3 text-gray-700'><MdLocationPin></MdLocationPin><h4>Est-7,Central Park South,Nyc</h4></div>
             <div className='space-y-3'>
@@ -30,7 +30,7 @@ const FlexCard = ({id,image,title,details,address}) => {
               <div className='flex items-center gap-3'><PiGarage className='text-2xl'></PiGarage> <span>{details.garage || 6} Garage</span></div>
               </div>
                 </div>
-            
+            <div className='flex grow'></div>
              <div className='border-t-2 border-gray-500 pt-2 flex justify-between items-center'>
                 <h1 className='text-xl text-black'>${details?.price||3545}</h1>
                 <div className='flex items-center gap-3 text-xl'>

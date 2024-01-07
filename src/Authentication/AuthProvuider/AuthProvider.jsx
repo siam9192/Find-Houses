@@ -7,24 +7,31 @@ const AuthProvider = ({children}) => {
     const [loading,setLoading] = useState(false);
     // auth related all functions
     const createUser = (email,password)=>{
+        setLoading(true)
    return  createUserWithEmailAndPassword(auth,email,password);
     }
     const login = (email,password) =>{
+        setLoading(true)
     return signInWithEmailAndPassword(auth,email,password);
     }
     const googleLogin = ()=>{
+        setLoading(true)
     return signInWithPopup(auth,new GoogleAuthProvider)
     }
     const logout = ()=>{
+        setLoading(true)
         signOut(auth)
     }
     useEffect(()=>{
         const observer = onAuthStateChanged(auth,(currentUser)=>{
+            setLoading(true)
         if(currentUser){
         setUser(currentUser)
+        setLoading(false)
         }
         else{
             setUser(null)
+            setLoading(false)
         }
         })
         return ()=> observer();

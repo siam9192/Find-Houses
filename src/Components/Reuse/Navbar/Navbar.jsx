@@ -7,11 +7,13 @@ import { CiMenuBurger } from "react-icons/ci";
 import AccountForms from '../../../Pages/Form/AccountForm';
 import UserAuth from '../../../Authentication/userAuth/userAuth';
 import './Navbar.css'
+import SideNavbar from './SideNavbar';
 const Navbar = () => {
 const [scrollY,setScrollY] = useState(0);
 const [visibility,setVisibility] = useState(false)
 const [navCard,setNavCard] = useState(false);
-const {user} = UserAuth()
+const [toggleNavbar,setToggleNavber] = useState(false)
+const {user,logout} = UserAuth()
 useEffect(()=>{
 const handleScroll = ()=>{
   setScrollY(window.scrollY)
@@ -29,12 +31,17 @@ const handleVisibility = ()=>{
 const handleNavCard = ()=>{
   setNavCard(!navCard)
 }
+const handleToggleNavbar = ()=>{
+  setToggleNavber(!toggleNavbar)
+  
+}
 // document.body.addEventListener('click',()=>{
 //   setNavCard(false)
 // })
+console.log('trogg',toggleNavbar)
 
     return (
-      <div>
+      <div >
         <div className={`lg:py-8 py-6 ${scrollY > 300 ?'bg-white':'bg-[#60605f]'} font-pop px-3 ${scrollY > 300 ?'':'bg-opacity-40'} fixed top-0 w-full z-50 shadow-md duration-1000`}>
          <div className={`flex justify-between items-center text-white ${scrollY > 300 ?'text-black':'text-white'}`}>
             <div className='flex items-center gap-8'>
@@ -48,25 +55,49 @@ const handleNavCard = ()=>{
              <NavLink  to="/"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Home </NavLink>
              <NavLink  to="/listing"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Listing </NavLink>
              <NavLink  to="/properties"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Properties </NavLink>
-             <NavLink  to="/pages"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Pages </NavLink>
+           
              <NavLink  to="/contact"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}> Contact </NavLink>
+             {
+              !user &&
+             <>
+             <NavLink  to="/login"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}>Login</NavLink>
+             <NavLink  to="/signup"  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "text-[#ff385c]" : ""}>Sign up</NavLink>
+             </>
+}
              </ul>
             </nav>
             </div>
            <div className={`lg:flex items-center gap-3 lg:block hidden ${scrollY > 300 ?'text-black':'text-white'}`}>
           
-           <div className='p-2 border-r-2'><NavLink  to=""  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} onClick={handleVisibility}> Sign in </NavLink></div>
+           {/* <div className='p-2 border-r-2'><NavLink  to=""  className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} onClick={handleVisibility}> Sign in </NavLink></div> */}
            {/* <span className='text-2xl'>|</span> */}
-           <div className='flex items-center gap-2 '>
+        {  user && <div className='flex items-center gap-2 '>
            <div className="avatar online">
   <div className="w-10 rounded-full">
     <img src={`${user?.photoURL ? user.photoURL : "/images/agents/1.jpg"}`}/>
   </div></div>
             <h4 className='flex items-center gap-2 hover:cursor-pointer' onClick={handleNavCard}><span>Hi,{user?.displayName.split(' ')[0]}!</span> <span >{navCard ? <MdArrowDropUp className='text-2xl'></MdArrowDropUp> : <IoMdArrowDropdown></IoMdArrowDropdown>}</span></h4>
            </div>
+}
            <button className='px-5 py-2 bg-[#ff385c] text-white rounded-md '>Add listing</button>
            </div>
-           <div className='text-3xl text-white font-semibold lg:hidden block'><CiMenuBurger></CiMenuBurger> </div>
+           <div className='text-3xl text-white font-semibold lg:hidden block' onClick={()=>handleToggleNavbar()}>
+           <div className='p-3 bg-gray-700 text-white rounded-full'>
+           <CiMenuBurger></CiMenuBurger>
+           </div>
+            {/* <label className="btn btn-circle swap swap-rotate" >
+  
+  
+  <input type="checkbox" />
+  
+ 
+  <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"/></svg>
+  
+  
+  <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"/></svg>
+  
+</label> */}
+             </div>
          </div>
         </div>
         {/* sign up from */}
@@ -77,9 +108,14 @@ const handleNavCard = ()=>{
           <Link to='/profile' className='hover:text-[#ff385c] hover:text-xl'>Profile</Link>
           <Link to='/dashboard' className='hover:text-[#ff385c] hover:text-xl'>Dashboard</Link>
           <Link to='setting' className='hover:text-[#ff385c] hover:text-xl'>Setting</Link>
-          <Link  className='hover:text-[#ff385c] hover:text-xl'>Logout</Link>
+         { user && <Link  className='hover:text-[#ff385c] hover:text-xl'onClick={()=>{
+            logout();
+            handleNavCard()
+          }}>Logout</Link>
+        }
         </div>
-       <AccountForms visibility={visibility} handleVisibility = {handleVisibility}></AccountForms>
+      <SideNavbar toggleNavbar = {toggleNavbar}></SideNavbar>
+       {/* <AccountForms visibility={visibility} handleVisibility = {handleVisibility}></AccountForms> */}
         </div>
     );
 }

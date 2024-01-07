@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Banner from '../../Components/Banner/Banner';
 import PopularPages from '../../Components/PopularPages/PopularPages';
 import FeaturedProperties from '../../Components/FeaturedProperties/FeaturedProperties';
@@ -7,8 +7,14 @@ import PopularProperties from '../../Components/PopularProperties/PopularPropert
 import Agents from '../../Components/Agents/Agents';
 import Testimonials from '../../Components/Testimonials/Testimonials';
 import Partners from '../../Components/Partners/Partners';
+import AxiosBase from '../../Axios/AxiosBase';
 
 const Home = () => {
+    const [data,setData] = useState(null);
+    useEffect(()=>{
+        AxiosBase().get('/find-house/homepage')
+        .then(res => setData(res.data))
+    },[])
     return (
         <div>
             <Banner></Banner>
@@ -16,7 +22,7 @@ const Home = () => {
                 <PopularPages></PopularPages>
                 {/* <FeaturedProperties></FeaturedProperties> */}
                 <Services></Services>
-                <PopularProperties></PopularProperties>
+                <PopularProperties properties={data?.popularProperties}></PopularProperties>
                 <Agents></Agents>
                 <Testimonials></Testimonials>
                 <Partners></Partners>

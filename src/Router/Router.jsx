@@ -13,6 +13,9 @@ import Requests from "../Pages/Dashboard/Requests/Requests";
 import RequestDetails from "../Pages/Dashboard/Requests/RequestDetails";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import Users from "../Pages/Dashboard/Users/Users";
+import SignUpPage from "../Pages/SignUpPage/SignUpPage";
+import LoginPage from "../Pages/LoginPage/LoginPage";
+import PrivateRoutes from "../Components/PrivateRoutes/PrivateRoutes";
 
 const Router = createBrowserRouter([
     {
@@ -39,7 +42,7 @@ const Router = createBrowserRouter([
         children:[
 {
     path:'/dashboard',
-    element:<Dashboard></Dashboard>
+    element:<PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>
 },
 {
     path:'/dashboard/profile',
@@ -77,6 +80,14 @@ const Router = createBrowserRouter([
     {
         path:'/dashboard/property-requests/details/:id',
         element:<RequestDetails></RequestDetails>
+    },
+    {
+        path:'/signup',
+        element:<SignUpPage></SignUpPage>
+    },
+    {
+        path:'/login',
+        element:<LoginPage></LoginPage>
     }
 ])
 

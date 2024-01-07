@@ -147,7 +147,7 @@ const Properties = () => {
                     <div>
 
                     </div>
-                    <div className='py-10 mt-32 lg:px-20 px-5 lg:flex gap-10'>
+                    <div className='py-32 lg:px-20 px-5 lg:flex gap-10'>
                         <div className='lg:w-[70%] space-y-10'>
                             <div className='flex justify-between items-center'>
                                 <div>

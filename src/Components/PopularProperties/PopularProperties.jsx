@@ -7,7 +7,8 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
-const PopularProperties = () => {
+const PopularProperties = ({properties=[]}) => {
+  console.log(properties)
     return (
         <div className='font-pop py-10  bg-[#ff385c]'>
          <Container>
@@ -35,30 +36,13 @@ const PopularProperties = () => {
         }}
         modules={[FreeMode, Pagination]}
         className="mySwiper" >
-            <SwiperSlide>
-                <ColumnCard/>
+            {
+              properties.map(item=>{
+                return <SwiperSlide key={item._id}>
+              <ColumnCard id={item._id} image={item.photos[0]} title={item.title} details={item.details} address={item.location.address} key={item._id}></ColumnCard>
             </SwiperSlide>
-            <SwiperSlide>
-                <ColumnCard/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ColumnCard/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ColumnCard/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ColumnCard/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ColumnCard/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ColumnCard/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ColumnCard/>
-            </SwiperSlide>
+              })
+            }
             </Swiper>
                </div>
          </Container>

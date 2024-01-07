@@ -34,6 +34,7 @@ const PropertyDetails = () => {
         }
     })
     useEffect(()=>{
+        window.scrollTo(0,0)
         if(!user||!property){
             return;
         }
@@ -79,7 +80,7 @@ const PropertyDetails = () => {
     return (
         <div>
            <Navbar></Navbar>
-       <div className='mt-32 bg-[#f5f7fb] font-pop'>
+       <div className='py-32 bg-[#f5f7fb] font-pop'>
        <Container>
             <div className='py-10 lg:px-20 px-4 lg:flex gap-10'>
                 <div className='lg:w-[70%] space-y-10'>

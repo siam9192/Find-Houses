@@ -82,7 +82,7 @@ const Profile = () => {
                     </div>
                     <div className='pt-3 space-y-2'>
                         <h1 className='text-2xl text-black font-semibold'>{user?.displayName}</h1>
-                        <h4>Role : Client</h4>
+                        <h4>Role : {profile?.role}</h4>
                     </div>
                 </div>
                 <div className='space-y-4 pt-3'>
