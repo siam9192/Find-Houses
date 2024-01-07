@@ -1,11 +1,13 @@
 import React from 'react';
 import AxiosBase from '../../Axios/AxiosBase';
 import UserAuth from '../../Authentication/userAuth/userAuth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaFacebook, FaGoogle } from 'react-icons/fa6';
 
 const SignUpPage = () => {
     const {createUser,googleLogin} = UserAuth();
+    const {pathname,state} = useLocation();
+    const navigate = useNavigate()
     const handleSignUp = (e)=>{
         e.preventDefault()
         const form = e.target;
@@ -34,14 +36,34 @@ const SignUpPage = () => {
     const loginWithGoogle = () =>{
         googleLogin()
         .then(res =>{
-        
+            document.getElementById('my_modal_4').showModal()
           const user = {
             email:res.user.email,
-            profilePhoto:'',
+            firstName:res.user.displayName,
+            lastName:'',
+            profilePhoto:res.user.photoURL,
             role:'client'
-        }})
+        }
+        AxiosBase().post('/user/login/google-facebook/new',user)
+        .then(res =>{
+            document.getElementById('my_modal_4').close()
+            console.log(res.data)
+            if(res.data.status){
+                if(state){
+                    navigate(state)
+                     }
+                     else{
+                        navigate('/')
+                     }
+            }
+        })
+        
+    })
+     
+       
     }
     return (
+        <div>
         <div className='flex justify-center items-center md:pt-5 font-pop'>
             <form action="" className='space-y-5 lg:w-1/3 md:w-1/2 w-full border- p-5 border-gray-600' onSubmit={handleSignUp}>
             <div className='space-y-3 '>
@@ -73,6 +95,19 @@ const SignUpPage = () => {
                 <button  className='bg-[#ff385c] hover:bg-[#2e2c2c] text-white px-6  py-3 '>Sign up</button>
                 <h1 className='text-end'>Already have an account? <Link to='/login' className = 'text-blue-600'>Login</Link></h1>
             </form>
+            
+        </div>
+        <dialog id="my_modal_4" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            
+          </form>
+         <div className='flex flex-col justify-center items-center py-14'>
+         <span className="loading loading-spinner loading-lg text-center  text-info"></span>
+         <p className='text-black mt-5 '>Just a moment please..</p>
+         </div>
+        </div>
+      </dialog>
         </div>
     );
 }

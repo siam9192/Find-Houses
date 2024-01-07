@@ -67,7 +67,7 @@ const Properties = () => {
         const total = properties.length
         
         const pageCount = Math.ceil(total/6);
-      
+        console.log(pageCount)
         const array = []
         for(let i = 1 ; i <= pageCount; i++ ){
           array.push(i)   
