@@ -9,20 +9,22 @@ import { GoArrowUp } from "react-icons/go";
 const Footer = () => {
     return (
         <div>
-            <div className='grid grid-cols-1 md;grid-cols-2 lg:grid-cols-4 bg-[#303441] py-20 px-4 font-pop text-white'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:space-y-0 space-y-5 bg-[#303441] py-20 px-4 font-pop text-white'>
                 <div className='space-y-3 text-white'>
                    <div className='flex items-center gap-2'>
-                   <TbHomeSignal className='text-white text-7xl'></TbHomeSignal><h2 className='text-white text-xl'>Find Houses</h2>
+                   <TbHomeSignal className='text-white text-7xl'></TbHomeSignal><div>
+                <h3 className={` font-semibold md:text-4xl text-2xl`}>Find<span className='text-[#ff385c] '>House</span></h3>
+        </div>
                    </div>
                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, exercitationem!</p>
                    <div className='flex items-center gap-2 '>
-                    <CiLocationOn className='text-[#ff385c]'></CiLocationOn> <p>95 South Park Avenue, USA</p>
+                    <CiLocationOn ></CiLocationOn> <p>95 South Park Avenue, USA</p>
                    </div>
                    <div className='flex items-center gap-2 '>
-                    <MdCall className='text-[#ff385c]'></MdCall> <p>+456 875 369 208</p>
+                    <MdCall ></MdCall> <p>+456 875 369 208</p>
                    </div>
                    <div className='flex items-center gap-2 '>
-                    <GrMail className='text-[#ff385c]'></GrMail> <p>+456 875 369 208</p>
+                    <GrMail ></GrMail> <p>+456 875 369 208</p>
                    </div>
                 </div>
                 <div className='space-y-3'>
@@ -33,7 +35,7 @@ const Footer = () => {
                 </div>
                     <div className='flex gap-3'>
                         <div>
-                            <ul className='space-y-2'>
+                            {/* <ul className='space-y-2'>
                                <div className='border-b-2 w-full pb-2'>
                                <a href="" className='pb-2  '>Home one</a>
                                </div>
@@ -46,10 +48,10 @@ const Footer = () => {
                                <div className='border-b-2 w-full pb-2'>
                                <a href="" className='pb-2  '>Home one</a>
                                </div>
-                            </ul>
+                            </ul> */}
                         </div>
                         <div>
-                            <ul className='space-y-2'>
+                            {/* <ul className='space-y-2'>
                                <div className='border-b-2 w-full pb-2'>
                                <a href="" className='pb-2  '>Home one</a>
                                </div>
@@ -62,7 +64,7 @@ const Footer = () => {
                                <div className='border-b-2 w-full pb-2'>
                                <a href="" className='pb-2  '>Home one</a>
                                </div>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                 </div>

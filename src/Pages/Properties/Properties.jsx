@@ -23,13 +23,13 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 const Properties = () => {
     const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const [layOutType, setLayOutType] = useState('grid');
-    const [sortBy, setSortBy] = useState(null);
+    const [sortBy, setSortBy] = useState(0);
     const [keyword,setKeyword] = useState('');
     const navigate = useNavigate();
     const [pages,setPages] = useState([])
     const [currentPage,setCurrentPage] = useState(1)
     const params = useSearchParams()[0]
-  console.log(params)
+
     // handle all dropdowns
     const [locationMenu, setLocationMenu] = useState(false);
     const [propertyMenu, setPropertyMenu] = useState(false);
@@ -57,11 +57,11 @@ const Properties = () => {
     const { data: properties = [], isLoading, refetch } = useQuery({
         queryKey: ['properties'],
         queryFn: async () => {
-            const response = await AxiosBase().get(`/properties?${searchParams}`)
+            const response = await AxiosBase().get(`/properties?${searchParams}&sort=${sortBy}`)
             return response.data;
         }
     })
-
+console.log(sortBy)
     useEffect(()=>{
         refetch()
         const total = properties.length
@@ -74,7 +74,7 @@ const Properties = () => {
         }
         setPages([...array])
        
-    },[])
+    },[sortBy])
     const handleLayout = (layout) => {
         setLayOutType(layout);
     }
@@ -147,23 +147,23 @@ const Properties = () => {
                     <div>
 
                     </div>
-                    <div className='py-32 lg:px-20 px-5 lg:flex gap-10'>
+                    <div className='py-32 lg:px-20 px-5 flex lg:flex-row flex-col gap-10 '>
                         <div className='lg:w-[70%] space-y-10'>
-                            <div className='flex justify-between items-center'>
+                            <div className='md:flex md:flex-row justify-between items-center'>
                                 <div>
                                     <h2 className='lg:text-xl text-black'>{properties.length} Search Results</h2>
 
                                 </div>
-                                <div className='flex items-center gap-3 '>
+                                <div className='flex md:justify-normal justify-between items-center gap-3 '>
                                     <div className='flex items-center gap-2 hover:cursor-pointer'>
                                         <div className='flex items-center  gap-2'>
                                             <MdOutlineSort className='text-xl'></MdOutlineSort><h2 className='text-black font-semibold'>SORTBY</h2>
                                         </div>
                                         <div >
-                                            <select name="" id="" className='w-full bg-transparent text-black hover:cursor-pointer'>
-                                                <option value="top selling" className='hover:bg-[#ff385c]'>Top selling</option>
-                                                <option value="low-high">Low to High</option>
-                                                <option value="high-low">High to Low</option>
+                                            <select name="" id="" className='w-full bg-transparent text-black hover:cursor-pointer' onChange={(e)=>setSortBy(e.target.value)}>
+                                                <option value="0" className='hover:bg-[#ff385c]'>Default</option>
+                                                <option value="1">Low to High</option>
+                                                <option value="-1">High to Low</option>
                                             </select>
                                         </div>
                                     </div>
@@ -196,7 +196,7 @@ const Properties = () => {
                                     </div>
                             }
                             {/* Pagination */}
-                        { properties.length > 0 &&  <div className='flex justify-center items-center'>
+                        { properties.length  > 0 ||pages.length > 0 &&  <div className='flex justify-center items-center'>
                             <div className='flex items-center gap-3 px-5'>
     <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={prevPage}>Previous</button>
     {
