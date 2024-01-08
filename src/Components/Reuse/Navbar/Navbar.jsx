@@ -40,7 +40,7 @@ const handleToggleNavbar = ()=>{
 
     return (
       <div >
-        <div className={`lg:py-8 py-6 ${scrollY > 300 ?'bg-white':'bg-[#60605f]'} font-pop px-3 ${scrollY > 300 ?'':'bg-opacity-40'} lg:fixed absolute top-0 w-full z-40 shadow-md duration-1000`}>
+        <div className={`lg:py-8 py-4 ${scrollY > 300 ?'bg-white':'bg-[#60605f]'} font-pop px-3 ${scrollY > 300 ?'':'bg-opacity-40'} lg:fixed absolute top-0 w-full z-40 shadow-md duration-1000`}>
          <div className={`flex justify-between items-center text-white ${scrollY > 300 ?'text-black':'text-white'}`}>
             <div className='flex items-center md:gap-8 gap-2'>
             <div className='text-3xl text-white font-semibold lg:hidden block' onClick={()=>handleToggleNavbar()}>

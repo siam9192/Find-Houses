@@ -10,7 +10,12 @@ const SignUpPage = () => {
     const {createUser,googleLogin} = UserAuth();
     const {pathname,state} = useLocation();
     const [error,setError] = useState('');
-    const navigate = useNavigate()
+    const [gender,setGender] = useState('Male');
+    const navigate = useNavigate();
+    
+
+    const professions = ['Software Developer', 'Teacher', 'Doctor', 'Graphic Designer', 'Engineer', 'Chef', 'Accountant', 'Nurse', 'Marketing Manager', 'Journalist', 'Electrician', 'Architect', 'Data Scientist', 'Lawyer', 'Web Designer', 'Pilot', 'Financial Analyst', 'Social Worker', 'Police Officer', 'Artist'];
+
     const handleSignUp = (e)=>{
         e.preventDefault()
         const form = e.target;
@@ -18,10 +23,13 @@ const SignUpPage = () => {
         const lastName = form.lastName.value;
         const email = form.email.value;
         const password = form.password.value;
+        const professions = form.professions.value;
         const user = {
             firstName,
             lastName,
             email,
+            gender,
+            professions,
             profilePhoto:'',
             role:'client'
         }
@@ -68,9 +76,12 @@ const SignUpPage = () => {
         })
         
     })
-     
-       
+    
     }
+    const handleGender = (value)=>{
+        setGender(value)
+    }
+   
     return (
         <div>
         <div className='flex justify-center items-center md:pt-5 font-pop'>
@@ -92,6 +103,35 @@ const SignUpPage = () => {
                 <div className='space-y-2'>
                 <p>Last Name * </p>
                 <input type="text" name='lastName' className='w-full px-2 py-3 rounded-lg border-2' />
+                </div>
+                <div className='space-y-2'>
+                <p>Gender * </p>
+              <div className='flex items-center gap-5'>
+                <div className='flex items-center gap-2'>
+                <input type="radio" value='Male' name="radio-1" className="radio" checked onClick={(e)=>handleGender(e.target.value)} />
+                <p>Male</p>
+                </div>
+                <div className='flex items-center gap-2'>
+                <input type="radio" value='Female' name="radio-1" className="radio" checked onClick={(e)=>handleGender(e.target.value)}/>
+                <p>Female</p>
+                </div>
+                <div className='flex items-center gap-2'>
+                <input type="radio" value='Others' name="radio-1" className="radio" checked onClick={(e)=>handleGender(e.target.value)}/>
+                <p>Others</p>
+                </div>
+              </div>
+                </div>
+                <div className='space-y-2'>
+                <p>What are you do * </p>
+                <select type="text" name='professions' className='w-full px-2 py-3 rounded-lg border-2 bg-white text-black' >
+                    {
+                        professions.map((item,index)=>{
+                          return  <option value={item} key={index}>{item}</option>
+                        })
+                        
+                    }
+                    <option value="Others">Others</option>
+                </select>
                 </div>
                 <div className='space-y-2'>
                 <p>Email Address * </p>

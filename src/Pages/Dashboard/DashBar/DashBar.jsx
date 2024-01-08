@@ -40,7 +40,7 @@ const DashBar = () => {
               </div>
            
             {
-              userRole === 'client' && <ClientRoutes pathname={pathname}></ClientRoutes> || userRole ==='agent' && <AgentRoutes></AgentRoutes>  || userRole === 'admin' && <AdminRoutes></AdminRoutes>
+              userRole === 'client' && <ClientRoutes pathname={pathname}></ClientRoutes> || userRole ==='agent' && <AgentRoutes pathname={pathname}></AgentRoutes>  || userRole === 'admin' && <AdminRoutes pathname={pathname}></AdminRoutes>
             }
               
               {/* <div className={`px-10 py-5 ${pathname === '/dashboard/payments' ? 'bg-[#172133]' : ''} `}>

@@ -73,7 +73,7 @@ const Profile = () => {
             <div className='bg-white shadow-lg p-5 space-y-5'>
                 <h1 className='text-2xl text-black py-2 border-b-[1px] border-gray-300'>Profile Details</h1>
                 <div className='py-6 flex gap-3'>
-                  <div className='w-32 h-32 rounded-full relative ' onMouseEnter={handleOverlay} onMouseLeave={handleOverlay}><img src={profilePhoto?profilePhoto[1]: user?.photoURL ||'/images/1.jpg'} alt="" className='w-32 h-32 rounded-full' />
+                  <div className='w-32 h-32 rounded-full relative ' onMouseEnter={handleOverlay} onMouseLeave={handleOverlay}><img src={profilePhoto?profilePhoto[1]: user?.photoURL ||'https://i.ibb.co/TH1W6TG/default-Pic.png'} alt="" className='w-32 h-32 rounded-full' />
                   <div className={`bg-gray-700 ${overlay?'block':'hidden'} hover:cursor-pointer opacity-50  absolute top-0 left-0 w-full h-full z-10 rounded-full`}></div>
                   <input type="file"className={`bg-gray-700  hover:cursor-pointer opacity-0  absolute top-0 left-0 w-full h-full z-10 rounded-full`} onChange={handleProfilePhoto}/>
                   <div className='text-white text-xl absolute bottom-4 right-4 z-20 hover:cursor-pointer'>
@@ -88,10 +88,10 @@ const Profile = () => {
                 <div className='space-y-4 pt-3'>
                     <h2 className='text-xl text-black font-semibold'>Contact Information</h2>
                         <div className='flex items-center gap-3 '>
-                            <GrMail className='text-[#ff385c]'></GrMail><h3>{profile?.contact_email}</h3>
+                            <GrMail className='text-[#ff385c]'></GrMail><h3>{profile?.contact_email||'N/A'}</h3>
                         </div>
                         <div className='flex items-center gap-3 '>
-                            <MdCall className='text-[#ff385c]'></MdCall><h3>{profile?.contact_phone}</h3>
+                            <MdCall className='text-[#ff385c]'></MdCall><h3>{profile?.contact_phone||'N/A'}</h3>
                         </div>
                     </div>
                   <form action="" onSubmit={onSubmit}>

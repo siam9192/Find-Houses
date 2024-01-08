@@ -3,10 +3,11 @@ import { FaCalendarAlt, FaMinus, FaPlus } from "react-icons/fa";
 import { CiLocationOn } from 'react-icons/ci';
 import { GrMail } from 'react-icons/gr';
 import { MdCall } from 'react-icons/md';
-const SideComponent = ({agent}) => {
+import UserAuth from '../../Authentication/userAuth/userAuth';
+const SideComponent = ({dangerouslySetInnerHTML,agent,id}) => {
     const [adult,setAdult] = useState(0);
     const [children,setChildren] = useState(0);
-
+    const {user}   = UserAuth();
     const increaseAdult = ()=>{
     const value = adult + 1;
     setAdult(value)
@@ -31,7 +32,26 @@ const SideComponent = ({agent}) => {
             }
             setChildren(value)
         }
-    
+    const sendMessage = (e) =>{
+        e.preventDefault()
+        const form = e.target;
+        const name = form.name.value;
+        const phone = form.name.value;
+        const email = form.email.value;
+        const text = form.text.value.replace(/\n/g, '<br>');
+        const message = {
+            property_id: id,
+            user_email: user.email,
+            message:{
+             name,
+            phone,
+            email,
+            text,
+            }
+        }
+      
+        
+    }
     return (
         <div className='space-y-5'>
             {/* <div className='bg-white p-5 shadow-md'>
@@ -66,7 +86,7 @@ const SideComponent = ({agent}) => {
             </div> */}
             <div className='bg-white space-y-3 shadow-md p-5'>
                 <h1 className='text-black text-xl'>Agent Information</h1>
-                <div className='py-2 border-t-2 border-b-2 space-y-3'>
+                <div className='py-2 border-t-2 border-gray-500 space-y-3'>
                     <div className='flex gap-2'>
                         <img src="/images/agents/1.jpg" alt="" className='w-14 h-14 rounded-full'/>
                        <div className='space-y-1'>
@@ -83,16 +103,16 @@ const SideComponent = ({agent}) => {
                             <MdCall className='text-[#ff385c]'></MdCall><h3>{agent?.phone}</h3>
                         </div>
                     </div>
-                    <form action="" className='py-3 space-y-2'>
+                    <form action="" className='py-3 space-y-2' onSubmit={sendMessage}>
                     <h2 className='text-xl text-black'>Request Inquiry</h2>
                      <div className='space-y-3'>
                         <input type="text" name='name' placeholder='Full Name' className='w-full p-2 border-2 '/>
                         <input type="text" name='phone' placeholder='Phone Number' className='w-full p-2 border-2 '/>
                         <input type="text" name='email' placeholder='Email Address' className='w-full p-2 border-2 '/>
-                        <textarea name="message" placeholder='Message' className='w-full p-2 border-2 h-52 resize-none rounded-lg'></textarea>
+                        <textarea name="text" placeholder='Message' className='w-full p-2 border-2 h-52 resize-none rounded-lg'></textarea>
                         <button className='w-full bg-[#ff385c] hover:bg-[#302c2c] text-white mt-4 py-3 rounded-md'>Submit Request</button>
                      </div>
-
+                    
                     </form>
                 </div>
             </div>

@@ -44,6 +44,7 @@ const Signup = () => {
                 <p>Last Name * </p>
                 <input type="text" name='lastName' className='w-full py-3 rounded-lg border-2' />
                 </div>
+              
                 <div className='space-y-2'>
                 <p>Email Address * </p>
                 <input type="text" name='email' className='w-full py-3 rounded-lg border-2' />

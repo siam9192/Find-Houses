@@ -4,7 +4,7 @@ import React from 'react';
 const AddReview = () => {
     return (
         <div>
-          <div className='flex justify-between items-center'>
+          <div className='lg:flex justify-between items-center space-y-4'>
         <div>
        <p>Your rating for this listing</p>
         <Rating name="size-large" defaultValue={2} />

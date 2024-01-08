@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../Components/Reuse/Navbar/Navbar';
 import { FaList,FaStar} from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
@@ -8,8 +8,26 @@ import { IoEyeOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import Rating from 'react-rating';
 import { TiStarFullOutline,TiStarOutline } from "react-icons/ti";
+import AxiosBase from '../../Axios/AxiosBase';
+import UserAuth from '../../Authentication/userAuth/userAuth';
 
 const Dashboard = () => {
+    const {user} = UserAuth();
+    const [userRole,setUserRole]= useState(null);
+    useEffect(()=>{
+        AxiosBase().get(`/user/check-role?email=${user.email}`)
+        .then(res =>{
+          setUserRole(res.data)
+        })
+    },[])
+    useEffect(()=>{
+        if(userRole){
+            AxiosBase().get(`/dashboard/data?email=${user.email}`)
+            .then(res=>{
+                console.log(res.data)
+            })
+        }
+    })
     return (
         <div className='w-full space-y-10'>
          
@@ -19,37 +37,37 @@ const Dashboard = () => {
          <div className='grid md:grid-cols-2 gap-5 text-white pt-10'>
             <div className='bg-[#1ec38b] flex gap-3 p-10 rounded-lg'>
             <div className='border-r-2 pr-6'>
-            <FaList className='text-5xl'></FaList>
+            <FaList className='md:text-5xl text-3xl'></FaList>
             </div>
             <div>
-                <h1 className='text-4xl'>345</h1>
+                <h1 className='md:text-4xl text-3xl'>345</h1>
                 <p>Published Property</p>
             </div>
             </div>
             <div className='bg-[#ff9911] flex gap-3 p-10 rounded-lg'>
             <div className='border-r-2 pr-6'>
-            <FaStar className='text-5xl'></FaStar>
+            <FaStar className='md:text-5xl text-3xl'></FaStar>
             </div>
             <div>
-                <h1 className='text-4xl'>116</h1>
+                <h1 className='md:text-4xl text-3xl'>116</h1>
                 <p>Total Reviews</p>
             </div>
             </div>
             <div className='bg-[#66aaee] flex gap-3 p-10 rounded-lg'>
             <div className='border-r-2 pr-6'>
-            <AiFillMessage className='text-5xl'></AiFillMessage>
+            <AiFillMessage className='md:text-5xl text-3xl'></AiFillMessage>
             </div>
             <div>
-                <h1 className='text-4xl'>432</h1>
+                <h1 className='md:text-4xl text-3xl'>432</h1>
                 <p>Total Message</p>
             </div>
             </div>
             <div className='bg-[#f91942] flex gap-3 p-10 rounded-lg'>
             <div className='border-r-2 pr-6'>
-            <FaHeart className='text-5xl'></FaHeart>
+            <FaHeart className='md:text-5xl text-3xl'></FaHeart>
             </div>
             <div>
-                <h1 className='text-4xl'>223</h1>
+                <h1 className='md:text-4xl text-3xl'>223</h1>
                 <p>Total Bookmarked</p>
             </div>
             </div>
