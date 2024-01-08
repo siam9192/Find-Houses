@@ -10,7 +10,7 @@ const SideNavbar = ({toggleNavbar,close}) => {
   const {user} = UserAuth();
   console.log('sidebar',toggleNavbar)
     return (
-        <div className={`min-w-[300px]  h-full font-pop px-5 pt-5  fixed top-0 left-0 bg-white text-black lg:hidden ${toggleNavbar ? 'left-0' :'-left-[200%]' } transition-all ease-out z-50 `}>
+        <div className={`min-w-[300px]  h-full font-pop px-5 pt-5  fixed top-0 left-0 bg-white text-black lg:hidden ${toggleNavbar ? 'block' :'hidden' } transition-all ease-out delay-200 z-50 `}>
             
             <h3 className={`  text-black font-semibold text-4xl`}>Find<span className='text-[#ff385c] '>House</span></h3>
             <p>We are alwayes to help you</p>

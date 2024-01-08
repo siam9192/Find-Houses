@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AxiosBase from '../../../Axios/AxiosBase';
-
+import { FaUsers } from 'react-icons/fa';
+import { SlOptions } from "react-icons/sl";
 const Users = () => {
-    // const [users,setUsers] = useState([]);
+    const [optionsIndex,setOptionsIndex] = useState(null);
+    const [searchEmail,setSearchEmail] = useState(null);
     const {data:users=[],isLoading,refetch} = useQuery({
         queryKey:['all-users'],
         queryFn:async()=>{
@@ -11,67 +13,67 @@ const Users = () => {
         return response.data
         }
     })
+  
     const changeRole = (email,role) =>{
         AxiosBase().patch('/user/update/role',{email,role})
         .then(res =>{
+          console.log(res.data)
             if(res.data.modifiedCount > 0){
                 refetch()
             }
         })
     }
-   
-    return (
-        <div>
-     <div className=' bg-white shadow-lg font-pop p-5'>
-            <div className='pt-5'>
-                <div className='py-2'><input type="text" placeholder='Search users by email' name="" id="" className='lg:w-1/3 w-full p-2 rounded-lg border-[2px] border-black ' /></div>
-            <div className="overflow-x-auto max-w-[1100px]">
-  <table className="table min-h-[500px]">
-    {/* head */}
-    <thead className='text-gray-700 text-xl font-normal  bg-[#f5f7fb] p-2'>
-      <tr className=''>
-        <th className='text-black font-normal'>Photo</th>
-        <th className='text-black font-normal text-[1rem]'>Name</th>
-        <th  className='text-black font-normal text-[1rem]'>Email</th>
-        <th  className='text-black font-normal text-[1rem]'>Role</th>
-        <th  className='text-black font-normal text-[1rem]'>Edit</th>
-        <th  className='text-black font-normal text-[1rem]'>Action</th>
-       
-      </tr>
-    </thead>
-    <tbody className='max-h-[250px] overflow-y-auto'>
-      {
-    users.map((user,index)=>{
-   return   <tr>
-   <td><img src="/images/1.jpg" alt="" className='w-20 h-20 rounded-full' /></td>
-   <td>{user.firstName + ' ' + user.lastName}</td>
-   <td>{user.email}</td>
-   <td>{user.role}</td>
-   <td>{user.role === 'client'?<button className='px-4 py-2 bg-primary text-white shadow-lg rounded-full hover:bg-pink-500' onClick={()=>changeRole(user.email,'agent')}>Make Agent</button> : <button className='px-4 py-2 bg-primary text-white shadow-lg rounded-full hover:bg-pink-500'onClick={()=>changeRole(user.email,'client')}>Make Client</button>}</td>
-   <td><button className='px-4 py-2 bg-black text-white shadow-lg rounded-full hover:bg-red-500'>Remove</button></td>
-   <td >
-  
+    const handleOptions = (index)=>{
+      if(index === optionsIndex){
+        setOptionsIndex(null)
+        return
+      }
+      setOptionsIndex(index)
 
-   </td>
- </tr>
-        })
-    
-}
-    </tbody>
-  </table>
-
-  {/* <div className='flex items-center gap-3 px-5'>
-    <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={prevPage}>Previous</button>
-    {
-        pages.map((page,index)=>{
-            return <button className={`px-4 py-2 ${currentPage === page ? 'bg-black text-white' : ''} hover:bg-[#ff385c] border-2 border-[#ff385c] text-black hover:text-white rounded-md`} onClick={()=>handleCurrentPage(page)} key={index}>{page}</button>
-        })
     }
-    <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={nextPage}>Next</button>
-  </div> */}
-</div>
+  
+ 
+
+    return (
+        <div className='font-pop'>
+       <div className='lg:flex  justify-between items-center space-y-4'>
+       <div className='flex items-center gap-2'><FaUsers className='text-[#ff385c] text-3xl'></FaUsers>  <h1 className='text-3xl text-black'>Users</h1></div>
+       <div>
+        <input type="text" placeholder='Search by email....' className='input input-primary' onChange={(e)=>setSearchEmail(e.target.value)}/>
+       </div>
+       </div>
+       <div className='grid md:grid-cols-2 gap-5 py-5'>
+       {
+        users.map((item,index)=>{
+          return <div className='bg-white p-5 shadow-lg rounded-md space-y-2 relative' key={index}>
+          <div className='flex items-center gap-4'>
+          <div className='relative'>
+          <img src={item.profilePhoto || 'https://i.ibb.co/TH1W6TG/default-Pic.png' } alt="" className='w-20 h-20 rounded-full' />
+          <div className={`absolute ${item.role==='client' && 'hidden'} bottom-1 -right-2 p-1 bg-black rounded-full`}>
+            <img src={item.role==='admin'?"/images/adminBadge.png":"/images/agentBadge.png"} alt=""  className='w-5 h-5'/>
+          </div>
+          </div>
+            <div>
+              <h1 className='text-xl text-black'>{item.firstName + " " + item.lastName}</h1>
+              <p>Businessmen</p>
             </div>
-            </div>
+          </div>
+          <div className='flex flex-wrap justify-between'>
+          <p>{item.email}</p>  <p className='text-black'>Joined:10 Jan 2024 </p>
+          </div>
+          <div className='p-4 bg-gray-300 rounded-full absolute top-2 right-2' onClick={()=>handleOptions(index)}>
+        <SlOptions className={`${index === optionsIndex ? 'rotate-90' : 'rotate-0'} duration-200`}></SlOptions>
+          </div>
+          <div className={`option-menu min-w-[150px] p-5 space-y-4 flex flex-col absolute top-14 md:-right-10  -right-2 bg-white rounded-md  text-gray-800 text-start shadow-md  z-50 list-none ${optionsIndex===index ? 'block' : 'hidden'} transition ease-out delay-300`} >
+         { item.role !== 'agent' && <li className='text-green-600 hover:cursor-pointer hover:text-blue-600' onClick={()=>changeRole('agent',item.email)}>Set as agent</li>}
+         { item.role === 'agent' && <li className='text-red-600 hover:cursor-pointer hover:text-blue-600' onClick={()=>changeRole('client',item.email)}>Set as client</li>}
+          <li className='hover:cursor-pointer hover:text-blue-600'>Visit Profile</li>
+          <li className='hover:cursor-pointer hover:text-blue-600'>Ban user</li>
+          </div>
+          </div>
+        })
+       }
+       </div>
         </div>
     );
 }

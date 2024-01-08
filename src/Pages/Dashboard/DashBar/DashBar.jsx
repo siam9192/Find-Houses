@@ -10,6 +10,7 @@ import { IoLockClosedSharp } from "react-icons/io5";
 import ClientRoutes from '../DashboardRoutes/ClientRoutes';
 import AgentRoutes from '../DashboardRoutes/AgentRoutes';
 import AxiosBase from '../../../Axios/AxiosBase';
+import AdminRoutes from '../DashboardRoutes/AdminRoutes';
 const DashBar = () => {
   const [userRole,setUserRole] = useState(null);
     const {user} = UserAuth();
@@ -27,7 +28,7 @@ const DashBar = () => {
     return (
         <div className='w-full bg-[#1d293e] text-[#d3d5d9] h-[100vh] py-10 font-pop sticky top-0 left-0'>
             <div className='flex flex-col justify-center items-center gap-2'>
-                <img src={user?.photoURL} alt="" className='w-32 h-32 rounded-full border-4 border-green-600' />
+                <img src={user?.photoURL ||'https://i.ibb.co/TH1W6TG/default-Pic.png'} alt="" className='w-32 h-32 rounded-full border-4 border-green-600' />
                 <h1 className='text-2xl'>{user?.displayName}</h1>
             </div>
             <div className='pt-10 space-y-'>
@@ -37,12 +38,9 @@ const DashBar = () => {
               <div className={`px-10 py-5 ${pathname === '/dashboard/profile' ? 'bg-[#172133]' : ''} `}>
               <Link to='/dashboard/profile' className='flex gap-3 items-center '><RiUser3Fill></RiUser3Fill> <h2>Profile</h2></Link>
               </div>
-              <div className={`px-10 py-5 ${pathname === '/dashboard/users' ? 'bg-[#172133]' : ''} `}>
-              <Link to='/dashboard/users' className='flex gap-3 items-center '><FaUsers></FaUsers> <h2>Users</h2></Link>
-              </div>
-            
+           
             {
-              userRole === 'client' && <ClientRoutes pathname={pathname}></ClientRoutes> || userRole ==='agent' && <AgentRoutes></AgentRoutes>  || userRole === ''
+              userRole === 'client' && <ClientRoutes pathname={pathname}></ClientRoutes> || userRole ==='agent' && <AgentRoutes></AgentRoutes>  || userRole === 'admin' && <AdminRoutes></AdminRoutes>
             }
               
               {/* <div className={`px-10 py-5 ${pathname === '/dashboard/payments' ? 'bg-[#172133]' : ''} `}>

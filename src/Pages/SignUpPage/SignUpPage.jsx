@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AxiosBase from '../../Axios/AxiosBase';
 import UserAuth from '../../Authentication/userAuth/userAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaFacebook, FaGoogle } from 'react-icons/fa6';
+import { updateProfile } from 'firebase/auth';
+import auth from '../../Authentication/Firebase/Firebase.config';
 
 const SignUpPage = () => {
     const {createUser,googleLogin} = UserAuth();
     const {pathname,state} = useLocation();
+    const [error,setError] = useState('');
     const navigate = useNavigate()
     const handleSignUp = (e)=>{
         e.preventDefault()
@@ -22,6 +25,9 @@ const SignUpPage = () => {
             profilePhoto:'',
             role:'client'
         }
+        if(password.length < 6){
+            setError('Password should be at least 6 characters')
+        }
 
         createUser(email,password)
         .then(res =>{
@@ -31,6 +37,7 @@ const SignUpPage = () => {
          AxiosBase().post('/user/new',user)
          form.reset()
         })
+        
     
     }
     const loginWithGoogle = () =>{
@@ -49,7 +56,7 @@ const SignUpPage = () => {
         AxiosBase().post('/user/login/google-facebook/new',user)
         .then(res =>{
             document.getElementById('my_modal_4').close()
-            console.log(res.data)
+           
             if(res.data.status){
                 if(state){
                     navigate(state)
@@ -94,7 +101,7 @@ const SignUpPage = () => {
                 <p>Password * </p>
                 <input type="text" name='password' className='w-full px-2 py-3 rounded-lg border-2' />
                 </div>
-                <button  className='bg-[#ff385c] hover:bg-[#2e2c2c] text-white px-6  py-3 '>Sign up</button>
+                <button  className='bg-[#ff385c] hover:bg-[#2e2c2c] py-3 rounded-lg text-white w-full text-center '>Sign up</button>
                 <h1 className='text-end'>Already have an account? <Link to='/login' className = 'text-blue-600'>Login</Link></h1>
             </form>
             

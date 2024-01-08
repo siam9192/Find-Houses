@@ -36,6 +36,7 @@ const AuthProvider = ({children}) => {
         })
         return ()=> observer();
     },[])
+    
     return (
         <div>
         <authContext.Provider value={{user,createUser,login,googleLogin,logout,loading}}>

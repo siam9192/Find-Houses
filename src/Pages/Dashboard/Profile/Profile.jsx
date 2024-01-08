@@ -58,7 +58,7 @@ const Profile = () => {
 
         })
         .then(res=>{
-            axios.put('http://localhost:5000/api/v1/user/profile/update',{email,contactInformation})
+          AxiosBase().put('/user/profile/update',{email,contactInformation})
             .then(res=>{
                 if(res.data.modifiedCount > 0){
                     form.reset()

@@ -37,7 +37,6 @@ setAgentProfile(res.data)
         email:agentProfile.contact_email,
         phone: agentProfile.contact_phone,
         address:agentProfile.address
-
       }
        AxiosBase().patch(`/property-requests/approve?email=${user.email}`,{id,doc:updatedDoc})
        .then(res=>{

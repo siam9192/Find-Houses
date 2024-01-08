@@ -4,6 +4,7 @@ import { IoMdCloudUpload } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import axios from 'axios';
 import UserAuth from '../../../Authentication/userAuth/userAuth';
+import AxiosBase from '../../../Axios/AxiosBase';
 const AddProperty = () => {
     const [features,setFeatures] = useState([]);
     const [images,setImages] = useState([]);
@@ -120,10 +121,10 @@ const AddProperty = () => {
             image: null,
             email: null,
             phone: null
-            
+        
         }
     }
-    axios.post('http://localhost:5000/api/v1/property/post',property)
+    AxiosBase().post('/property/post',property)
     .then(res =>{
         console.log(res.data)
     })

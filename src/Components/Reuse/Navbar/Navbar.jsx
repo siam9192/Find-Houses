@@ -74,7 +74,7 @@ const handleToggleNavbar = ()=>{
         {  user && <div className='flex items-center gap-2 '>
            <div className="avatar online">
   <div className="w-10 rounded-full">
-    <img src={`${user?.photoURL ? user.photoURL : "/images/agents/1.jpg"}`}/>
+    <img src={`${user?.photoURL ? user.photoURL : "https://i.ibb.co/TH1W6TG/default-Pic.png"}`}/>
   </div></div>
             <h4 className='flex items-center gap-2 hover:cursor-pointer' onClick={handleNavCard}><span>Hi,{user?.displayName.split(' ')[0]}!</span> <span >{navCard ? <MdArrowDropUp className='text-2xl'></MdArrowDropUp> : <IoMdArrowDropdown></IoMdArrowDropdown>}</span></h4>
            </div>

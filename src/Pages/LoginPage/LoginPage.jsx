@@ -99,7 +99,7 @@ const LoginPage = () => {
                 <p>Password * </p>
                 <input type="text" name='password' className='w-full px-2 py-3 rounded-lg border-2' />
                 </div>
-                <button type='submit' className='bg-[#ff385c] text-white px-6  py-3 '>Login</button>
+                <button type='submit' className='bg-[#ff385c] text-white w-full rounded-lg py-3 '>Login</button>
                 <h1 className='text-end'>Don't have an account? <Link className = 'text-blue-600' to='/signup'> Signup</Link></h1>
             </form>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}

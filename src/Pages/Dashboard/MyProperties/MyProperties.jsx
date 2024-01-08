@@ -148,7 +148,7 @@ console.log('slice',)
 
     </tbody>
   </table>
-  <div className='flex items-center gap-3 px-5'>
+ {pages.length !==0 && <div className='flex items-center gap-3 px-5'>
     <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={prevPage}>Previous</button>
     {
         pages.map((page,index)=>{
@@ -157,6 +157,7 @@ console.log('slice',)
     }
     <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={nextPage}>Next</button>
   </div>
+}
 </div>
             </div>
             </div>

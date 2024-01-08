@@ -3,7 +3,7 @@ import { FaCalendarAlt, FaMinus, FaPlus } from "react-icons/fa";
 import { CiLocationOn } from 'react-icons/ci';
 import { GrMail } from 'react-icons/gr';
 import { MdCall } from 'react-icons/md';
-const SideComponent = () => {
+const SideComponent = ({agent}) => {
     const [adult,setAdult] = useState(0);
     const [children,setChildren] = useState(0);
 
@@ -70,17 +70,17 @@ const SideComponent = () => {
                     <div className='flex gap-2'>
                         <img src="/images/agents/1.jpg" alt="" className='w-14 h-14 rounded-full'/>
                        <div className='space-y-1'>
-                        <h2 className='text-xl text-black'>Lisa clark</h2>
+                        <h2 className='text-xl text-black'>{agent?.name}</h2>
                         <p>Agent of property</p>
 
                        </div>
                     </div>
                     <div className='space-y-4 pt-3'>
                         <div className='flex items-center gap-3 '>
-                            <GrMail className='text-[#ff385c]'></GrMail><h3>agent@gmail.com</h3>
+                            <GrMail className='text-[#ff385c]'></GrMail><h3>{agent?.email}</h3>
                         </div>
                         <div className='flex items-center gap-3 '>
-                            <MdCall className='text-[#ff385c]'></MdCall><h3>017466887</h3>
+                            <MdCall className='text-[#ff385c]'></MdCall><h3>{agent?.phone}</h3>
                         </div>
                     </div>
                     <form action="" className='py-3 space-y-2'>

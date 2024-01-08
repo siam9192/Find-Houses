@@ -17,12 +17,13 @@ const ClientProperties = () => {
             return
         }
         console.log(6876)
-        AxiosBase().get(`client/properties?agent=${user?.email}`)
+        AxiosBase().get(`/client-properties?agent=${user?.email}`)
         .then(res=>{
             setProperties(res.data)
         })
 
     },[user])
+    console.log(properties)
     return (
         <div>
         {/* section 1 Listing */}
@@ -43,7 +44,7 @@ const ClientProperties = () => {
 <tbody className='max-h-[250px] overflow-y-auto'>
  {/* row 1 */}
 {
-   properties.map((property,index)=>{
+   properties?.map((property,index)=>{
        return   <tr key={index}>
        <td>
            <Link to={`/dashboard/property-requests/details/${property._id}`} className='flex items-center  gap-2'>

@@ -313,7 +313,7 @@ const PropertyDetails = () => {
             </div>
                 </div>
                 <div className='lg:w-[30%] relative'>
-                    <SideComponent></SideComponent>
+                    <SideComponent agent={property?.agentInformation}></SideComponent>
                 </div>
                 </div>
             </Container>

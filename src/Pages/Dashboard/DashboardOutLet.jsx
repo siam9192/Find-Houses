@@ -11,7 +11,7 @@ const DashboardOutLet = () => {
             <div className='w-[20%] lg:block hidden'>
          <DashBar></DashBar>
             </div>
-            <div className='lg:w-[80%] w-full bg-[#f5f7fb] px-20 py-10'>
+            <div className='lg:w-[80%] w-full bg-[#f5f7fb] lg:px-20 lg:py-10 md:px-10 px-2 py-5'>
                 <Outlet></Outlet>
             </div>
         </div>
