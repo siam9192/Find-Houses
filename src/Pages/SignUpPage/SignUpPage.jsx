@@ -142,6 +142,7 @@ const SignUpPage = () => {
                 <input type="text" name='password' className='w-full px-2 py-3 rounded-lg border-2' />
                 </div>
                 <button  className='bg-[#ff385c] hover:bg-[#2e2c2c] py-3 rounded-lg text-white w-full text-center '>Sign up</button>
+                {error && <p className='text-red-600'>{error}</p>}
                 <h1 className='text-end'>Already have an account? <Link to='/login' className = 'text-blue-600'>Login</Link></h1>
             </form>
             

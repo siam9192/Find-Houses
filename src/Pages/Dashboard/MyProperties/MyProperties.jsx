@@ -28,7 +28,7 @@ const MyProperties = () => {
      .then(res=>{
         setProperties(res.data)
         const total = res.data.length
-        const pageCount = total/2;
+        const pageCount = total/5;
         const array = []
         for(let i = 1 ; i <= pageCount; i++ ){
           array.push(i)   
@@ -97,12 +97,12 @@ console.log('slice',)
              {/* section 1 Listing */}
          <div className=' bg-white shadow-xl font-pop p-5'>
             <div className=''>
-            <div className="overflow-x-auto max-w-[1100px]">
+            <div className="overflow-x-auto ">
   <table className="table   ">
     {/* head */}
     <thead className='text-gray-700 text-xl font-normal  bg-[#f5f7fb] p-2'>
       <tr className=''>
-        <th className='text-black font-normal'>My Properties</th>
+        <th className='text-black font-normal '>My Properties</th>
         <th className='font-normal text-[1rem]'>Date Added</th>
         <th  className='font-normal text-[1rem]'>Views</th>
         <th  className='font-normal text-[1rem]'>Status</th>
@@ -110,32 +110,32 @@ console.log('slice',)
         
       </tr>
     </thead>
-    <tbody className='max-h-[250px] overflow-y-auto'>
+    <tbody className='max-h-[450px] overflow-y-auto'>
       {
-     properties.slice((currentPage-1)*2,((currentPage-1)*2)+2).map((property,index)=>{
-            return   <tr key={index}>
-            <td>
+     properties.slice((currentPage-1)*5,((currentPage-1)*5)+5).map((property,index)=>{
+            return   <tr key={index} className='w-fit'>
+            <td >
                 <div className='flex items-center  gap-2'>
                     <img src={property.photos[0]} alt="" className='w-40 h-32 rounded-lg'/>
                     <div className='space-y-2'>
                         <h2 className='text-2xl'>{property.title}</h2>
                         <p>{property.location.address}</p>
                         <div className='flex items-center gap-2'>
-                        <Rating initialRating={4} 
+                        <Rating initialRating={0} 
                  emptySymbol={<TiStarOutline className='text-[#ff385c] text-xl hover:cursor-pointer'/>}
                  fullSymbol={<TiStarFullOutline className='text-[#ff385c] text-xl hover:cursor-pointer'/>}
                             readonly
                         
     />
-    <p>(6 Reviews)</p>
+    <p className='w-fit'>(0 Reviews)</p>
                         </div>
                     </div>
                 </div>
             </td>
-            <td>0{property.date.day}.{property.date.month + 1}.{property.date.year}</td>
-            <td>125</td>
-            <td>Pending..</td>
-            <td >
+            <td className='w-fit'>{property?.date.day < 10 && 0}{property.date.day}.{property?.date.month+1 < 10 && 0}{property.date.month + 1}.{property.date.year}</td>
+            <td className='w-fit'>125</td>
+            <td className='w-fit'>{property.request_status}</td>
+            <td className='w-fit'>
                 <div className='flex justify-between items-center'>
             <Link className='text-green-600 hover:text-[#ff385c]'>Edit</Link>
             <MdDelete className='hover:text-[#ff385c] text-xl hover:cursor-pointer'onClick={()=>handleDelete(property._id)}></MdDelete>

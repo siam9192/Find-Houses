@@ -5,11 +5,11 @@ import { FaUsers } from 'react-icons/fa';
 import { SlOptions } from "react-icons/sl";
 const Users = () => {
     const [optionsIndex,setOptionsIndex] = useState(null);
-    const [searchEmail,setSearchEmail] = useState(null);
+    const [searchEmail,setSearchEmail] = useState('');
     const {data:users=[],isLoading,refetch} = useQuery({
         queryKey:['all-users'],
         queryFn:async()=>{
-        const response = await AxiosBase().get('/users');
+        const response = await AxiosBase().get(`/users?searchEmail=${searchEmail}`);
         return response.data
         }
     })
@@ -17,7 +17,6 @@ const Users = () => {
     const changeRole = (email,role) =>{
         AxiosBase().patch('/user/update/role',{email,role})
         .then(res =>{
-          console.log(res.data)
             if(res.data.modifiedCount > 0){
                 refetch()
             }
@@ -39,7 +38,8 @@ const Users = () => {
        <div className='lg:flex  justify-between items-center space-y-4'>
        <div className='flex items-center gap-2'><FaUsers className='text-[#ff385c] text-3xl'></FaUsers>  <h1 className='text-3xl text-black'>Users</h1></div>
        <div>
-        <input type="text" placeholder='Search by email....' className='input input-primary' onChange={(e)=>setSearchEmail(e.target.value)}/>
+        <input type="text" placeholder='Search by email....' className='input input-primary' onChange={(e)=>{setSearchEmail(e.target.value)
+           refetch()}}/>
        </div>
        </div>
        <div className='grid md:grid-cols-2 gap-5 py-5'>
@@ -55,7 +55,7 @@ const Users = () => {
           </div>
             <div>
               <h1 className='text-xl text-black'>{item.firstName + " " + item.lastName}</h1>
-              <p>Businessmen</p>
+              <p>{item.professions||'Businessmen'}</p>
             </div>
           </div>
           <div className='flex flex-wrap justify-between'>
@@ -65,8 +65,8 @@ const Users = () => {
         <SlOptions className={`${index === optionsIndex ? 'rotate-90' : 'rotate-0'} duration-200`}></SlOptions>
           </div>
           <div className={`option-menu min-w-[150px] p-5 space-y-4 flex flex-col absolute top-14 md:-right-10  -right-2 bg-white rounded-md  text-gray-800 text-start shadow-md  z-50 list-none ${optionsIndex===index ? 'block' : 'hidden'} transition ease-out delay-300`} >
-         { item.role !== 'agent' && <li className='text-green-600 hover:cursor-pointer hover:text-blue-600' onClick={()=>changeRole('agent',item.email)}>Set as agent</li>}
-         { item.role === 'agent' && <li className='text-red-600 hover:cursor-pointer hover:text-blue-600' onClick={()=>changeRole('client',item.email)}>Set as client</li>}
+         { item.role !== 'agent' && <li className='text-green-600 hover:cursor-pointer hover:text-blue-600' onClick={()=>changeRole(item.email,'agent')}>Set as agent</li>}
+         { item.role === 'agent' && <li className='text-red-600 hover:cursor-pointer hover:text-blue-600' onClick={()=>changeRole(item.email,'client')}>Set as client</li>}
           <li className='hover:cursor-pointer hover:text-blue-600'>Visit Profile</li>
           <li className='hover:cursor-pointer hover:text-blue-600'>Ban user</li>
           </div>

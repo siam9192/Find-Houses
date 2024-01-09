@@ -5,6 +5,7 @@ import { RxCross2 } from "react-icons/rx";
 import axios from 'axios';
 import UserAuth from '../../../Authentication/userAuth/userAuth';
 import AxiosBase from '../../../Axios/AxiosBase';
+import toast, { Toaster } from 'react-hot-toast';
 const AddProperty = () => {
     const [features,setFeatures] = useState([]);
     const [images,setImages] = useState([]);
@@ -20,13 +21,14 @@ const AddProperty = () => {
     const [bathRoomsMenu,setBathRoomsMenu] = useState(false);
     const [draginMedia,setDragingMedia] = useState(false);
     const statusArray = ['Rent','Sale'];
-    const typeArray = ['house','commercial','apartment','lot','garage'];
+    const typeArray = ['house','Flat','commercial','apartment','lot','garage'];
     const allRooms = [1,2,3,4,5,6,7];
     const featuresValue = ["Air Conditioning", "Swimming Pool", "Central Heating", "Laundry Room","Gym","Alarm","Window Covering","Refrigerator","TV Cable & WIFI","Microwave"
     ]
  const {user} = UserAuth();
 
-
+const today = new Date();
+console.log(today.getDate())
     const getValue = (e,name)=>{
         const value = new FormData(e.currentTarget)
         return value[name];
@@ -108,7 +110,7 @@ const AddProperty = () => {
         features
         },
         date:{
-         day:today.getDay(),
+         day:today.getDate(),
          month:today.getMonth(),
          year:today.getFullYear()
         },
@@ -124,9 +126,23 @@ const AddProperty = () => {
         
         }
     }
+if(!status||!type || images.length===0 || !rooms){
+return;
+}
     AxiosBase().post('/property/post',property)
     .then(res =>{
-        console.log(res.data)
+      
+        if(res.data.insertedId){
+            toast.success('Successfully Posted!');
+        form.reset()
+        setType(null);
+        setStatus(null);
+       setBathRooms(null)
+        setRooms(null);
+        setImages([])
+        setImagesUrl([])
+        setFeatures([]);
+        }
     })
 }
     
@@ -195,11 +211,11 @@ const removeImage = (index)=>{
             <div className='pt-5 space-y-4'>
                <div className='space-y-2'>
                 <h3 className='font-semibold text-black'>Property Title</h3>
-               <input type="text" name='title' placeholder='Enter your property title' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg'/>
+               <input type="text" name='title' placeholder='Enter your property title' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg' required/>
                </div>
                <div className='space-y-2'>
                 <h3 className='font-semibold text-black'>Property Description</h3>
-               <textarea type="text" name='description' placeholder='Describe about your property' className='w-full p-2  border-[1px] outline-none min-h-[250px] rounded-lg'> </textarea>
+               <textarea type="text" name='description' placeholder='Describe about your property' className='w-full p-2  border-[1px] outline-none min-h-[250px] rounded-lg' required> </textarea>
                </div>
                <div className='flex justify-between items-center gap-3'>
                <div className='w-full relative' onClick={handleStatusMenu}>
@@ -234,11 +250,11 @@ const removeImage = (index)=>{
                <div className='flex gap-5'>
                <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>Price</h3>
-               <input type="text" name='price' placeholder='USD' className='w-full px-2 py-3 border-[1px]  outline-none rounded-lg'/>
+               <input type="text" name='price' placeholder='USD' className='w-full px-2 py-3 border-[1px]  outline-none rounded-lg' required/>
                </div>
                <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>Area</h3>
-               <input type="text" name='area' placeholder='Squre' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg'/>
+               <input type="text" name='area' placeholder='Squre' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg' required/>
                </div>
                </div>
             </div>
@@ -249,7 +265,7 @@ const removeImage = (index)=>{
             <div className='w-full border-2 border-[#1abc9c] border-dashed flex flex-col justify-center items-center gap-5 h-52'>
                <IoMdCloudUpload className='text-7xl text-[#1abc9c]'></IoMdCloudUpload>
                <p className='text-[#1abc9c]'>Click here or drop files to upload</p>
-               <input type="file" multiple  className='w-full h-full opacity-0 hover:cursor-pointer absolute' onDragOver={handleDragOver} onChange={handleChange} />
+               <input type="file" multiple  className='w-full h-full opacity-0 hover:cursor-pointer absolute' onDragOver={handleDragOver} onChange={handleChange} required/>
                <div className={`w-full h-full flex justify-center items-center bg-slate-950 ${draginMedia ? 'block' : 'hidden'} absolute z-10`}>
                 <h1 className='text-white text-4xl '>Drop Now</h1>
                </div>
@@ -269,31 +285,31 @@ const removeImage = (index)=>{
             <div className='flex gap-5'>
                <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>Address</h3>
-               <input type="text" name='address' placeholder='Enter Your Address' className='w-full px-2 py-3 border-[1px]  outline-none rounded-lg'/>
+               <input type="text" name='address' placeholder='Enter Your Address' className='w-full px-2 py-3 border-[1px]  outline-none rounded-lg' required/>
                </div>
                <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>City</h3>
-               <input type="text" name='city' placeholder='Enter Your City' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg'/>
+               <input type="text" name='city' placeholder='Enter Your City' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg' required/>
                </div>
                </div>
                <div className='flex gap-5'>
                <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>State</h3>
-               <input type="text" name='state' placeholder='Enter Your State' className='w-full px-2 py-3 border-[1px]  outline-none rounded-lg'/>
+               <input type="text" name='state' placeholder='Enter Your State' className='w-full px-2 py-3 border-[1px]  outline-none rounded-lg' required/>
                </div>
                <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>Country</h3>
-               <input type="text" name='country' placeholder='Enter Your Country' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg'/>
+               <input type="text" name='country' placeholder='Enter Your Country' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg' required/>
                </div>
                </div>
                <div className='flex gap-5'>
                <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>Google Maps latitude</h3>
-               <input type="text"name='latitude' placeholder='Google Maps latitude' className='w-full px-2 py-3 border-[1px]  outline-none rounded-lg'/>
+               <input type="text"name='latitude' placeholder='Google Maps latitude' className='w-full px-2 py-3 border-[1px]  outline-none rounded-lg' required/>
                </div>
                <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>Google Maps longitude</h3>
-               <input type="text" name='longitude' placeholder='Google Maps longitude' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg'/>
+               <input type="text" name='longitude' placeholder='Google Maps longitude' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg' required/>
                </div>
                </div>
                 </div>
@@ -304,7 +320,7 @@ const removeImage = (index)=>{
             <div className='flex justify-between items-center gap-3'>
             <div className='space-y-2 w-full'>
                 <h3 className='font-semibold '>age</h3>
-               <input type="number" name='age' placeholder='Age' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg'/>
+               <input type="number" name='age' placeholder='Age' className='w-full px-2 py-3 border-[1px] outline-none rounded-lg' required/>
                </div>
             
               <div className='w-full relative' onClick={handleRoomsMenu}>
@@ -379,6 +395,10 @@ const removeImage = (index)=>{
                 </div>
                 <button type='submit' className='px-6 py-3 bg-[#ff235c] text-white rounded-lg'>Submit Property</button>
                 </div>
+                <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
                 </form>
         
     );

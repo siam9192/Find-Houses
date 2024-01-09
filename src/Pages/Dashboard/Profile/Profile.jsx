@@ -51,7 +51,7 @@ const Profile = () => {
           },
         })
         const photoUrl = response.data.data.display_url;
-
+        contactInformation.profilePhoto = photoUrl;
         updateProfile(auth.currentUser,{
             displayName:`${firstName} ${lastName}`,
             photoURL:photoUrl

@@ -30,7 +30,7 @@ const Requests = () => {
 setAgentProfile(res.data)
     })
   },[user])
-  console.log(agentProfile)
+  
     const approveProperty = (id) =>{
       const updatedDoc = {
         name:agentProfile.firstName + ' '+ agentProfile.lastName,

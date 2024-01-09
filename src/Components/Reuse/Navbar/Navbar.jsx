@@ -85,7 +85,7 @@ const handleToggleNavbar = ()=>{
          </div>
         </div>
         {/* sign up from */}
-        <div className={`p-5 bg-white font-pop transition ease-in-out delay-150 ${navCard ? 'block' :'hidden'} flex flex-col gap-3 min-w-[250px] rounded-lg fixed top-20 right-4 z-50   `} style={{
+        <div className={`nav-card p-5 bg-white font-pop  ${navCard ? 'block' :'hidden'} flex flex-col gap-3 min-w-[250px] rounded-lg fixed top-20 right-4 z-50   `} style={{
           
         }}>
           <h1 className='text-xl font-semibold'>{user?.displayName || ''}</h1>

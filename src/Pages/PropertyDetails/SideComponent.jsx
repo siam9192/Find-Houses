@@ -4,9 +4,11 @@ import { CiLocationOn } from 'react-icons/ci';
 import { GrMail } from 'react-icons/gr';
 import { MdCall } from 'react-icons/md';
 import UserAuth from '../../Authentication/userAuth/userAuth';
+import AxiosBase from '../../Axios/AxiosBase';
 const SideComponent = ({dangerouslySetInnerHTML,agent,id}) => {
     const [adult,setAdult] = useState(0);
     const [children,setChildren] = useState(0);
+    const [messageSending,setMessageSending] = useState(false)
     const {user}   = UserAuth();
     const increaseAdult = ()=>{
     const value = adult + 1;
@@ -32,7 +34,8 @@ const SideComponent = ({dangerouslySetInnerHTML,agent,id}) => {
             }
             setChildren(value)
         }
-    const sendMessage = (e) =>{
+    const sendMessage = async(e) =>{
+        setMessageSending(true)
         e.preventDefault()
         const form = e.target;
         const name = form.name.value;
@@ -43,12 +46,19 @@ const SideComponent = ({dangerouslySetInnerHTML,agent,id}) => {
             property_id: id,
             user_email: user.email,
             message:{
-             name,
+            name,
             phone,
             email,
             text,
             }
         }
+    const response = await  AxiosBase().post('/user/message',message)
+    const result = response.data;
+    if(result.insertedId){
+        setMessageSending(false);
+        form.reset();
+    }
+     
       
         
     }
@@ -110,7 +120,7 @@ const SideComponent = ({dangerouslySetInnerHTML,agent,id}) => {
                         <input type="text" name='phone' placeholder='Phone Number' className='w-full p-2 border-2 '/>
                         <input type="text" name='email' placeholder='Email Address' className='w-full p-2 border-2 '/>
                         <textarea name="text" placeholder='Message' className='w-full p-2 border-2 h-52 resize-none rounded-lg'></textarea>
-                        <button className='w-full bg-[#ff385c] hover:bg-[#302c2c] text-white mt-4 py-3 rounded-md'>Submit Request</button>
+                        <button disabled={messageSending} className='w-full bg-[#ff385c] hover:bg-[#302c2c] text-white mt-4 py-3 rounded-md'>{messageSending?'Sending...' : 'Send Massage'}</button>
                      </div>
                     
                     </form>

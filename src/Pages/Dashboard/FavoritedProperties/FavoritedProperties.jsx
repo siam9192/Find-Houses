@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { MdDelete, MdOutlineModeEdit } from 'react-icons/md';
+import { MdDelete, MdOutlineBed, MdOutlineModeEdit } from 'react-icons/md';
 import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
 import Rating from 'react-rating';
 import { Link } from 'react-router-dom';
 import { IoEyeOutline } from "react-icons/io5";
 import AxiosBase from '../../../Axios/AxiosBase';
 import UserAuth from '../../../Authentication/userAuth/userAuth';
+import { LiaBathSolid } from 'react-icons/lia';
+import { PiGarage, PiShareFat } from 'react-icons/pi';
+import { CiHeart } from 'react-icons/ci';
+import { LuTriangleRight } from 'react-icons/lu';
 const FavoritedProperties = () => {
     const [properties,setProperties] = useState([])
     const [refetch,setRefetch] = useState(false);
@@ -72,57 +76,45 @@ return <div>
     return (
 
         <div>
-             {/* section 1 Listing */}
-         <div className=' bg-white shadow-lg font-pop p-5'>
-            <div className='pt-5'>
-            <div className="overflow-x-auto max-w-[1100px]">
-  <table className="table min-h-[500px]">
-    {/* head */}
-    <thead className='text-gray-700 text-xl font-normal  bg-[#f5f7fb] p-2'>
-      <tr className=''>
-        <th className='text-black font-normal'>Top Property</th>
-        <th className='font-normal text-[1rem]'>Date Added</th>
-        <th  className='font-normal text-[1rem]'>Remove</th>
-        <th  className='font-normal text-[1rem]'>Visit</th>
-        
-      </tr>
-    </thead>
-    <tbody className='max-h-[250px] overflow-y-auto'>
-      {
-        properties.slice((currentPage-1)*4,((currentPage-1)*4)+4).map((property,index)=>{
-   return   <tr>
-   <td>
-       <div className='flex items-center  gap-2'>
-           <img src={property.photos[0]} alt="" className='w-40 h-32 rounded-lg'/>
-           <div className='space-y-2'>
-               <h2 className='text-2xl'>{property.title}</h2>
-               <p>{property.location.address}</p>
-               <div className='flex items-center gap-2'>
-               <Rating initialRating={4} 
-        emptySymbol={<TiStarOutline className='text-[#ff385c] text-xl hover:cursor-pointer'/>}
-        fullSymbol={<TiStarFullOutline className='text-[#ff385c] text-xl hover:cursor-pointer'/>}
-                   readonly
-               
-/>
-<p>(6 Reviews)</p>
-               </div>
-           </div>
+       <div className='min-h-[500px] font-pop'>
+       <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-5 grid-cols-1 pb-5'>
+    {
+      properties?.map((property,index)=>{
+        return <div className=' gap-2 bg-white p-2 shadow-md rounded-md'>
+        <div>
+        <img src={property.photos[0]} alt="" className='w-full h-52 rounded-md' />
+        </div>
+        <div className='pt-2 space-y-4'>
+          <h1 className='text-2xl text-black'>{property.title}</h1>
+          <p>{property.location.address}</p>
+          <div className='py-2 space-y-5 pr-5'>
+             <div className='flex justify-between items-center'> <div className='flex items-center gap-3'><MdOutlineBed className='text-2xl'></MdOutlineBed> <span>{property?.details?.extraInformation.rooms} Bedrooms</span></div>
+             <div className='flex items-center gap-3'><LiaBathSolid className='text-2xl'></LiaBathSolid> <span>{property?.details?.extraInformation.bathRooms} Bathrooms</span></div>
+             </div>
+             <div className='flex justify-between items-center'> <div className='flex items-center gap-3'><LuTriangleRight className='text-2xl'></LuTriangleRight> <span>{property.details?.area ? property.details.area : 1200} Sqft</span></div>
+             <div className='flex items-center gap-3'><PiGarage className='text-2xl'></PiGarage> <span>{property?.details?.garage? details.garage : 0} Garage</span></div>
+             </div>
+             <div className='border-t-2 pt-5 flex justify-between items-center'>
+                <h1 className='text-xl text-black'>${property.details?.price}</h1>
+                {/* <div className='flex items-center gap-3 text-xl'>
+                 <CiHeart></CiHeart> <PiShareFat></PiShareFat>
+                </div> */}
+                <button className='bg-black py-2 px-4 text-white  rounded-lg' onClick={()=>removerProperty(property._id)}>Remove</button>
+             </div>
+            </div>
+          <div>
+
+
+          </div>
+        </div>
+        </div>
+      })
+    }
+  </div>
        </div>
-   </td>
-   <td>{property.date?.day}.{property.date?.month}.{property.date?.year}</td>
-   <td><button className='px-4 py-2 bg-black text-white shadow-lg rounded-full hover:bg-red-500' onClick={()=>removerProperty(property._id)}>Remove</button></td>
-   <td >
-  <Link to={`/property-details/${property._id}`} > <IoEyeOutline className='hover:text-[#ff385c] hover:cursor-pointer text-xl'></IoEyeOutline></Link>
 
-   </td>
- </tr>
-        })
-    
-}
-    </tbody>
-  </table>
-
-  <div className='flex items-center gap-3 px-5'>
+ <div className='flex justify-center items-center'>
+ <div className='flex items-center gap-3 px-5'>
     <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={prevPage}>Previous</button>
     {
         pages.map((page,index)=>{
@@ -131,9 +123,9 @@ return <div>
     }
     <button className='px-6 py-3 bg-[#ff385c] text-white rounded-md' onClick={nextPage}>Next</button>
   </div>
-</div>
-            </div>
-            </div>
+         
+ </div>
+           
         </div>
     );
 }

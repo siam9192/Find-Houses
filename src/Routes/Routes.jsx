@@ -9,7 +9,7 @@ const Routes = () => {
     // main theme 
     // https://code-theme.com/html/findhouses/index.
     // https://preview.themeforest.net/item/tairo-multipurpose-nuxt-tailwind-css-dashboard-system/full_screen_preview/45383013?_ga=2.120179528.1361948986.1704718682-2137286590.1698674286
-    
+    // http://magento2.magentech.com/themes/sm_ego/pub/default
     return (
         <div>
             <Navbar></Navbar>
