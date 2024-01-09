@@ -1,32 +1,37 @@
 import React from 'react';
 import { IoIosStar } from 'react-icons/io';
+import { TiStarFullOutline, TiStarOutline } from 'react-icons/ti';
+import Rating from 'react-rating';
 
-const PropertyReview = () => {
+const PropertyReview = ({review}) => {
+    const month = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      ];
     return (
         <div>
-            <div className='flex justify-between items-center'>
-                <div className='flex items-center gap-3'>
+            <div className='flex justify-between items-center space-y-2'>
+                <div className='md:flex items-center gap-3'>
                    <div>
-                    <img src="/images/agents/1.jpg" alt="" className='w-20 h-20 rounded-full' />
+                    <img src={review.profilePhoto || 'https://i.ibb.co/TH1W6TG/default-Pic.png'} alt="" className='md:w-20 md:h-20 w-10 h-10 rounded-full' />
                     </div> 
-                    <div className='space-y-3'>
-                        <h2 className='text-[#de4d4d] text-xl'>Marry Smith</h2>
-                         <p>May30 2020</p>
+                    <div className='md:space-y-2 space-y-1'>
+                        <h2 className='text-[#de4d4d] text-xl'>{review.name}</h2>
+                         <p>{review.date.day}{month[review.date.month-1]} {review.date.year}</p>
                     </div>
                 </div>
-                <div className='flex gap-1 text-yellow-400'>
-                            <IoIosStar></IoIosStar>
-                            <IoIosStar></IoIosStar>
-                            <IoIosStar></IoIosStar>
-                            <IoIosStar></IoIosStar>
-                            <IoIosStar></IoIosStar>
-                        </div>
+                <Rating initialRating={review.review.ratting} 
+                 emptySymbol={<TiStarOutline className='text-[#ff385c] text-xl hover:cursor-pointer'/>}
+                 fullSymbol={<TiStarFullOutline className='text-[#ff385c] text-xl hover:cursor-pointer'/>}
+                            readonly
+                        
+    />
                         
             </div>
-            <div className='p-10 space-y-3'>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa assumenda dolorum, quo fugit esse repellendus incidunt? Dicta tempora nostrum eius!</p>
+            <div className='md:p-10 p-5 space-y-3'>
+            <p className='text-black'>{review.review.text}</p>
             <div>
-                <img src="/images/banner1.jpg" alt=""  className='w-72 rounded-md'/>
+                <img src={review.review.image} alt=""  className='w-72 rounded-md'/>
             </div>
             </div>
         </div>

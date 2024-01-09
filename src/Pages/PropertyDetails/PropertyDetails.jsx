@@ -18,6 +18,7 @@ import { useParams } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import UserAuth from '../../Authentication/userAuth/userAuth';
 import Navbar from '../../Components/Reuse/Navbar/Navbar';
+import PropertyReviews from '../../Components/PropertyReviews/PropertyReviews';
 const PropertyDetails = () => {
     const [imageIndex,setImageIndex] = useState(0);
     const {user} = UserAuth();
@@ -30,7 +31,7 @@ const PropertyDetails = () => {
     const {data:property,isLoading,refetch} = useQuery({
         queryKey:['property'],
         queryFn:async()=>{
-            const response = await AxiosBase().get(`/property/${id}`)
+            const response = await AxiosBase().get(`/property?id=${id}`)
             return response.data;
         }
     })
@@ -297,20 +298,12 @@ const PropertyDetails = () => {
                     
                  </div>
                     </div>
-                    <div className='lg:p-10 p-5 space-y-5 bg-white shadow-md '>
-            <h2 className='text-black text-2xl font-medium'>3Reviews</h2>
-            <div className='border-t-4 border-[#ff385c] w-[8%]'></div>
-            <div  className='space-y-4 max-h-[500px] overflow-y-auto'>
-            <PropertyReview></PropertyReview>
-            <PropertyReview></PropertyReview>
-            <PropertyReview></PropertyReview>
-            </div>
-            </div>
+                    <PropertyReviews id={property?._id}></PropertyReviews>
             <div className='lg:p-10 p-5 space-y-5 bg-white shadow-md '>
             <h2 className='text-black text-2xl font-medium'>Add Review</h2>
             <div className='border-t-4 border-[#ff385c] w-[8%]'></div>
             <div  className='space-y-4 max-h-[500px] overflow-y-auto'>
-           <AddReview></AddReview>
+           <AddReview id={property?._id}></AddReview>
             </div>
 
             </div>

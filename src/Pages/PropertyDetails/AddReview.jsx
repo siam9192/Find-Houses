@@ -5,7 +5,7 @@ import axios from 'axios';
 import AxiosBase from '../../Axios/AxiosBase';
 import toast, { Toaster } from 'react-hot-toast';
 
-const AddReview = () => {
+const AddReview = ({id}) => {
   const  {user} = UserAuth();
   const [ratting,setRatting] = useState(2);
   const [photo,setPhoto] = useState([]);
@@ -31,6 +31,7 @@ const AddReview = () => {
   // console.log(photo)
   const photoUrl = response.data.data.display_url 
     const main = {
+      property_id: id,
       name:user.displayName,
       email:user.email,
       profilePhoto:user.photoURL,

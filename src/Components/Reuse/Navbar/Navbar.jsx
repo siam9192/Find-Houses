@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { TbHomeSignal } from "react-icons/tb";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { MdArrowDropUp } from "react-icons/md";
 import { CiMenuBurger } from "react-icons/ci";
 import AccountForms from '../../../Pages/Form/AccountForm';
@@ -71,12 +71,12 @@ const handleToggleNavbar = ()=>{
             </div>
            <div className={`lg:flex items-center gap-3 lg:block  ${scrollY > 300 ?'text-black':'text-white'}`}>
           
-        {  user && <div className='flex items-center gap-2 '>
+        {  user && <div className='flex items-center gap-2  '>
            <div className="avatar online">
   <div className="w-10 rounded-full">
     <img src={`${user?.photoURL ? user.photoURL : "https://i.ibb.co/TH1W6TG/default-Pic.png"}`}/>
   </div></div>
-            <h4 className='flex items-center gap-2 hover:cursor-pointer' onClick={handleNavCard}><span>Hi,{user?.displayName.split(' ')[0]}!</span> <span >{navCard ? <MdArrowDropUp className='text-2xl'></MdArrowDropUp> : <IoMdArrowDropdown></IoMdArrowDropdown>}</span></h4>
+            <h4 className='flex items-center gap-2 hover:cursor-pointer' onClick={handleNavCard}><span>Hi,{user?.displayName.split(' ')[0]}!</span> <span >{navCard ? <IoMdArrowDropup className='text-xl'></IoMdArrowDropup> : <IoMdArrowDropdown className='text-xl'></IoMdArrowDropdown>}</span></h4>
            </div>
 }
            <button className='px-5 py-2 bg-[#ff385c] text-white rounded-md lg:block hidden '>Add listing</button>
@@ -85,7 +85,7 @@ const handleToggleNavbar = ()=>{
          </div>
         </div>
         {/* sign up from */}
-        <div className={`nav-card p-5 bg-white font-pop  ${navCard ? 'block' :'hidden'} flex flex-col gap-3 min-w-[250px] rounded-lg fixed top-20 right-4 z-50   `} style={{
+        <div className={`nav-card p-5 bg-white font-pop  ${navCard ? 'block' :'hidden'} flex flex-col gap-3 min-w-[250px] rounded-lg fixed top-20 right-4 z-50  shadow-md `} style={{
           
         }}>
           <h1 className='text-xl font-semibold'>{user?.displayName || ''}</h1>
